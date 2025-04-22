@@ -1,0 +1,3658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/#5.8.0'>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="Volantis" content="5.8.0">
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+  <link rel="canonical" href="http://example.com/2025/04/15/c语言学习笔记/"/>
+  <!-- 渲染优化 -->
+    <meta http-equiv='x-dns-prefetch-control' content='on' />
+      <link rel='dns-prefetch' href='https://unpkg.com'>
+      <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Content-Security-Policy" content=" default-src 'self' https:; block-all-mixed-content; base-uri 'self' https:; form-action 'self' https:; worker-src 'self' https:; connect-src 'self' https: *; img-src 'self' data: https: *; media-src 'self' https: *; font-src 'self' data: https: *; frame-src 'self' https: *; manifest-src 'self' https: *; child-src https:; script-src 'self' https: 'unsafe-inline' *; style-src 'self' https: 'unsafe-inline' *; ">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <!-- import head_begin begin -->
+  <!-- import head_begin end -->
+  <!-- Custom Files headBegin begin-->
+  
+  <!-- Custom Files headBegin end-->
+  <!-- front-matter head_begin begin -->
+  <!-- front-matter head_begin end -->
+  <link rel="preload" href="/css/style.css" as="style">
+  <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <!-- feed -->
+  <!-- 页面元数据 -->
+  <title>C语言学习笔记 - 锦依卫の小小天地</title>
+  <meta name="keywords" content="study,computer,null">
+  <meta desc name="description" content="一个锦依卫的个人成长 - 锦依卫 - 锦依卫の小小天地">
+  
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言学习笔记">
+<meta property="og:url" content="http://example.com/2025/04/15/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="锦依卫の小小天地">
+<meta property="og:description" content="0 基础概念0.1 位、字节、字的关系1字&#x3D;8字节；1字节&#x3D;8位；1字&#x3D;64位 位（bit，比特）数据传输大多是以位为单位，一个位代表一个0或者1，每8个位组成一个字节（B）是最小一级的信息单位。字长：电脑技术中对CPU在单位时间内能一次处理的二进制数的位数叫做字长 0.2 字符串简介strlen()：获取字符串长度，包括空格和标点符号sizeof：用于判断变量或数据">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+<meta property="article:published_time" content="2025-04-14T23:12:00.000Z">
+<meta property="article:modified_time" content="2025-04-22T08:13:13.317Z">
+<meta property="article:author" content="锦依卫">
+<meta property="article:tag" content="study">
+<meta property="article:tag" content="computer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+  <style>
+    /* 首屏样式 */
+    #safearea {
+  display: none;
+}
+:root {
+  --color-site-body: #f4f4f4;
+  --color-site-bg: #f4f4f4;
+  --color-site-inner: #fff;
+  --color-site-footer: #666;
+  --color-card: #fff;
+  --color-text: #444;
+  --color-block: #f6f6f6;
+  --color-inlinecode: #c74f00;
+  --color-codeblock: #fff7ea;
+  --color-h1: #3a3a3a;
+  --color-h2: #3a3a3a;
+  --color-h3: #333;
+  --color-h4: #444;
+  --color-h5: #555;
+  --color-h6: #666;
+  --color-p: #444;
+  --color-list: #666;
+  --color-list-hl: #30ad91;
+  --color-meta: #888;
+  --color-read-bkg: #e0d8c8;
+  --color-read-post: #f8f1e2;
+  --color-copyright-bkg: #f5f5f5;
+}
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+*::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+*::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: #3dd9b6;
+  cursor: pointer;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #ff5722;
+}
+html {
+  color: var(--color-text);
+  width: 100%;
+  height: 100%;
+  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-size: 16px;
+}
+html >::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+html >::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+html >::-webkit-scrollbar-thumb {
+  background: #54b5a0 linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 75%, transparent 75%, transparent);
+  cursor: pointer;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+html >::-webkit-scrollbar-thumb:hover {
+  background: #54b5a0 linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 75%, transparent 75%, transparent);
+}
+body {
+  background-color: var(--color-site-body);
+  text-rendering: optimizelegibility;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body.modal-active {
+  overflow: hidden;
+}
+@media screen and (max-width: 680px) {
+  body.modal-active {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+a {
+  color: #2092ec;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+a:hover {
+  color: #ff5722;
+}
+a:active,
+a:hover {
+  outline: 0;
+}
+ul,
+ol {
+  padding-left: 0;
+}
+ul li,
+ol li {
+  list-style: none;
+}
+header {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+img {
+  border: 0;
+  background: none;
+  max-width: 100%;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  height: 0;
+  border: 0;
+  border-radius: 1px;
+  -webkit-border-radius: 1px;
+  border-bottom: 1px solid rgba(68,68,68,0.1);
+}
+button,
+input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+button {
+  overflow: visible;
+  text-transform: none;
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+@supports (backdrop-filter: blur(20px)) {
+  .blur {
+    background: rgba(255,255,255,0.9) !important;
+    backdrop-filter: saturate(200%) blur(20px);
+  }
+}
+.shadow {
+  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+}
+.shadow.floatable {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.shadow.floatable:hover {
+  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.1), 0 4px 8px 0px rgba(0,0,0,0.1), 0 8px 16px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 2px 4px 0px rgba(0,0,0,0.1), 0 4px 8px 0px rgba(0,0,0,0.1), 0 8px 16px 0px rgba(0,0,0,0.1);
+}
+#l_cover {
+  min-height: 64px;
+}
+.cover-wrapper {
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  height: 100vh;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  -khtml-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -o-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  color: var(--color-site-inner);
+  padding: 0 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: -100px;
+}
+.cover-wrapper .cover-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+}
+.cover-wrapper .cover-bg.lazyload:not(.loaded) {
+  opacity: 0;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+}
+.cover-wrapper .cover-bg.lazyload.loaded {
+  animation-delay: 0s;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-name: fadeIn;
+}
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -khtml-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.cover-wrapper .cover-body {
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.cover-wrapper#full {
+  height: calc(100vh + 100px);
+  padding-bottom: 100px;
+}
+.cover-wrapper#half {
+  max-height: 640px;
+  min-height: 400px;
+  height: calc(36vh - 64px + 200px);
+}
+.cover-wrapper #scroll-down {
+  width: 100%;
+  height: 64px;
+  position: absolute;
+  bottom: 100px;
+  text-align: center;
+  cursor: pointer;
+}
+.cover-wrapper #scroll-down .scroll-down-effects {
+  color: #fff;
+  font-size: 24px;
+  line-height: 64px;
+  position: absolute;
+  width: 24px;
+  left: calc(50% - 12px);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  animation: scroll-down-effect 1.5s infinite;
+  -webkit-animation: scroll-down-effect 1.5s infinite;
+  -khtml-animation: scroll-down-effect 1.5s infinite;
+  -moz-animation: scroll-down-effect 1.5s infinite;
+  -o-animation: scroll-down-effect 1.5s infinite;
+  -ms-animation: scroll-down-effect 1.5s infinite;
+}
+@-moz-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-webkit-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@-o-keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+  50% {
+    top: -16px;
+    opacity: 0.4;
+    -webkit-opacity: 0.4;
+    -moz-opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.cover-wrapper .cover-body {
+  margin-top: 64px;
+  margin-bottom: 100px;
+}
+.cover-wrapper .cover-body,
+.cover-wrapper .cover-body .top,
+.cover-wrapper .cover-body .bottom {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  max-width: 100%;
+}
+.cover-wrapper .cover-body .bottom {
+  margin-top: 32px;
+}
+.cover-wrapper .cover-body .title {
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+  font-size: 3.125rem;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.cover-wrapper .cover-body .subtitle {
+  font-size: 20px;
+}
+.cover-wrapper .cover-body .logo {
+  max-height: 120px;
+  max-width: calc(100% - 4 * 16px);
+}
+@media screen and (min-height: 1024px) {
+  .cover-wrapper .cover-body .title {
+    font-size: 3rem;
+  }
+  .cover-wrapper .cover-body .subtitle {
+    font-size: 1.05rem;
+  }
+  .cover-wrapper .cover-body .logo {
+    max-height: 150px;
+  }
+}
+.cover-wrapper .cover-body .m_search {
+  position: relative;
+  max-width: calc(100% - 16px);
+  width: 320px;
+  vertical-align: middle;
+}
+.cover-wrapper .cover-body .m_search .form {
+  position: relative;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  width: 100%;
+}
+.cover-wrapper .cover-body .m_search .icon,
+.cover-wrapper .cover-body .m_search .input {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.cover-wrapper .cover-body .m_search .icon {
+  position: absolute;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  line-height: 2.5rem;
+  width: 32px;
+  top: 0;
+  left: 5px;
+  color: rgba(68,68,68,0.75);
+}
+.cover-wrapper .cover-body .m_search .input {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  height: 2.5rem;
+  width: 100%;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-size: 0.875rem;
+  -webkit-appearance: none;
+  padding-left: 36px;
+  border-radius: 1.4rem;
+  -webkit-border-radius: 1.4rem;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  border: none;
+  color: var(--color-text);
+}
+@media screen and (max-width: 500px) {
+  .cover-wrapper .cover-body .m_search .input {
+    padding-left: 36px;
+  }
+}
+.cover-wrapper .cover-body .m_search .input:hover {
+  background: rgba(255,255,255,0.8);
+}
+.cover-wrapper .cover-body .m_search .input:focus {
+  background: #fff;
+}
+.cover-wrapper .list-h {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -khtml-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  align-items: stretch;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.cover-wrapper .list-h a {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1 0;
+  -ms-flex: 1 0;
+  flex: 1 0;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  font-weight: 600;
+}
+.cover-wrapper .list-h a img {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  margin: 4px;
+  min-width: 40px;
+  max-width: 44px;
+}
+@media screen and (max-width: 768px) {
+  .cover-wrapper .list-h a img {
+    min-width: 36px;
+    max-width: 40px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .cover-wrapper .list-h a img {
+    margin: 2px 4px;
+    min-width: 32px;
+    max-width: 36px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .cover-wrapper .list-h a img {
+    min-width: 28px;
+    max-width: 32px;
+  }
+}
+.cover-wrapper {
+  max-width: 100%;
+}
+.cover-wrapper.search .bottom .menu {
+  margin-top: 16px;
+}
+.cover-wrapper.search .bottom .menu .list-h a {
+  white-space: nowrap;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  align-items: baseline;
+  padding: 2px;
+  margin: 4px;
+  color: var(--color-site-inner);
+  opacity: 0.75;
+  -webkit-opacity: 0.75;
+  -moz-opacity: 0.75;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  border-bottom: 2px solid transparent;
+}
+.cover-wrapper.search .bottom .menu .list-h a i {
+  margin-right: 4px;
+}
+.cover-wrapper.search .bottom .menu .list-h a p {
+  font-size: 0.9375rem;
+}
+.cover-wrapper.search .bottom .menu .list-h a:hover,
+.cover-wrapper.search .bottom .menu .list-h a.active,
+.cover-wrapper.search .bottom .menu .list-h a:active {
+  opacity: 1;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  border-bottom: 2px solid var(--color-site-inner);
+}
+@font-face {
+  font-family: 'UbuntuMono';
+  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-weight: 'normal';
+  font-style: 'normal';
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Varela Round';
+  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf");
+  font-weight: 'normal';
+  font-style: 'normal';
+  font-display: swap;
+}
+.l_header {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  width: 100%;
+  height: 64px;
+  background: var(--color-card);
+  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+}
+.l_header.auto {
+  transition: opacity 0.4s ease;
+  -webkit-transition: opacity 0.4s ease;
+  -khtml-transition: opacity 0.4s ease;
+  -moz-transition: opacity 0.4s ease;
+  -o-transition: opacity 0.4s ease;
+  -ms-transition: opacity 0.4s ease;
+  visibility: hidden;
+}
+.l_header.auto.show {
+  opacity: 1 !important;
+  -webkit-opacity: 1 !important;
+  -moz-opacity: 1 !important;
+  visibility: visible;
+}
+.l_header .container {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+.l_header #wrapper {
+  height: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.l_header #wrapper .nav-main,
+.l_header #wrapper .nav-sub {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  -khtml-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -o-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -khtml-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -o-justify-content: space-between;
+  -ms-justify-content: space-between;
+  align-items: center;
+}
+.l_header #wrapper .nav-main {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.l_header #wrapper.sub .nav-main {
+  transform: translateY(-64px);
+  -webkit-transform: translateY(-64px);
+  -khtml-transform: translateY(-64px);
+  -moz-transform: translateY(-64px);
+  -o-transform: translateY(-64px);
+  -ms-transform: translateY(-64px);
+}
+.l_header #wrapper .nav-sub {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  opacity: 0;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  height: 64px;
+  width: calc(100% - 2 * 16px);
+  position: absolute;
+}
+.l_header #wrapper .nav-sub ::-webkit-scrollbar {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+}
+@media screen and (min-width: 2048px) {
+  .l_header #wrapper .nav-sub {
+    max-width: 55vw;
+    margin: auto;
+  }
+}
+.l_header #wrapper.sub .nav-sub {
+  opacity: 1;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+}
+.l_header #wrapper .title {
+  position: relative;
+  color: var(--color-text);
+  padding-left: 24px;
+  max-height: 64px;
+}
+.l_header #wrapper .nav-main .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+  line-height: 64px;
+  padding: 0 24px;
+  font-size: 1.25rem;
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+}
+.l_header #wrapper .nav-main .title img {
+  height: 64px;
+}
+.l_header .nav-sub {
+  max-width: 1080px;
+  margin: auto;
+}
+.l_header .nav-sub .title {
+  font-weight: bold;
+  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  line-height: 1.2;
+  max-height: 64px;
+  white-space: normal;
+  flex-shrink: 1;
+}
+.l_header .switcher {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  line-height: 64px;
+  align-items: center;
+}
+.l_header .switcher .s-toc {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .l_header .switcher .s-toc {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    display: flex;
+  }
+}
+.l_header .switcher >li {
+  height: 48px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  margin: 2px;
+}
+@media screen and (max-width: 500px) {
+  .l_header .switcher >li {
+    margin: 0 1px;
+    height: 48px;
+  }
+}
+.l_header .switcher >li >a {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0.85em 1.1em;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  border: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  color: #3dd9b6;
+}
+.l_header .switcher >li >a:hover {
+  border: none;
+}
+.l_header .switcher >li >a.active,
+.l_header .switcher >li >a:active {
+  border: none;
+  background: var(--color-site-bg);
+}
+@media screen and (max-width: 500px) {
+  .l_header .switcher >li >a {
+    width: 36px;
+    height: 48px;
+  }
+}
+.l_header .nav-sub .switcher {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+}
+.l_header .m_search {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  height: 64px;
+  width: 240px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+@media screen and (max-width: 1024px) {
+  .l_header .m_search {
+    width: 44px;
+    min-width: 44px;
+  }
+  .l_header .m_search input::placeholder {
+    opacity: 0;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+  }
+  .l_header .m_search:hover {
+    width: 240px;
+  }
+  .l_header .m_search:hover input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@media screen and (min-width: 500px) {
+  .l_header .m_search:hover .input {
+    width: 100%;
+  }
+  .l_header .m_search:hover .input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search {
+    min-width: 0;
+  }
+  .l_header .m_search input::placeholder {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+  }
+}
+.l_header .m_search .form {
+  position: relative;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.l_header .m_search .icon {
+  position: absolute;
+  width: 36px;
+  left: 5px;
+  color: var(--color-meta);
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search .icon {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: none;
+  }
+}
+.l_header .m_search .input {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: 1.3;
+  width: 100%;
+  color: var(--color-text);
+  background: #fafafa;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding-left: 40px;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border: none;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+@media screen and (min-width: 500px) {
+  .l_header .m_search .input:focus {
+    box-shadow: 0 4px 8px 0px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 4px 8px 0px rgba(0,0,0,0.1);
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .m_search .input {
+    background: var(--color-block);
+    padding-left: 8px;
+    border: none;
+  }
+  .l_header .m_search .input:hover,
+  .l_header .m_search .input:focus {
+    border: none;
+  }
+}
+@media (max-width: 500px) {
+  .l_header .m_search {
+    left: 0;
+    width: 0;
+    overflow: hidden;
+    position: absolute;
+    background: #fff;
+    transition: all 0.28s ease;
+    -webkit-transition: all 0.28s ease;
+    -khtml-transition: all 0.28s ease;
+    -moz-transition: all 0.28s ease;
+    -o-transition: all 0.28s ease;
+    -ms-transition: all 0.28s ease;
+  }
+  .l_header .m_search .input {
+    border-radius: 32px;
+    -webkit-border-radius: 32px;
+    margin-left: 16px;
+    padding-left: 16px;
+  }
+  .l_header.z_search-open .m_search {
+    width: 100%;
+  }
+  .l_header.z_search-open .m_search .input {
+    width: calc(100% - 120px);
+  }
+}
+ul.m-pc >li>a {
+  color: inherit;
+  border-bottom: 2px solid transparent;
+}
+ul.m-pc >li>a:active,
+ul.m-pc >li>a.active {
+  border-bottom: 2px solid #3dd9b6;
+}
+ul.m-pc li:hover >ul.list-v,
+ul.list-v li:hover >ul.list-v {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+ul.nav-list-h {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: -ms-flexbox /* TWEENER - IE 10 */;
+  display: -webkit-flex /* NEW - Chrome */;
+  display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+  display: flex;
+  align-items: stretch;
+}
+ul.nav-list-h>li {
+  position: relative;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -khtml-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  height: 100%;
+  line-height: 2.4;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+ul.nav-list-h>li >a {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 600;
+}
+ul.list-v {
+  z-index: 1;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  position: absolute;
+  background: var(--color-card);
+  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.08), 0 4px 8px 0px rgba(0,0,0,0.08), 0 8px 16px 0px rgba(0,0,0,0.08);
+  -webkit-box-shadow: 0 2px 4px 0px rgba(0,0,0,0.08), 0 4px 8px 0px rgba(0,0,0,0.08), 0 8px 16px 0px rgba(0,0,0,0.08);
+  margin-top: -6px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  padding: 8px 0;
+}
+ul.list-v.show {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+}
+ul.list-v hr {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+ul.list-v >li {
+  white-space: nowrap;
+  word-break: keep-all;
+}
+ul.list-v >li.header {
+  font-size: 0.78125rem;
+  font-weight: bold;
+  line-height: 2em;
+  color: var(--color-meta);
+  margin: 8px 16px 4px;
+}
+ul.list-v >li.header i {
+  margin-right: 8px;
+}
+ul.list-v >li ul {
+  margin-left: 0;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  margin-top: -40px;
+}
+ul.list-v .aplayer-container {
+  min-height: 64px;
+  padding: 6px 16px;
+}
+ul.list-v >li>a {
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  color: var(--color-list);
+  font-size: 0.875rem;
+  font-weight: bold;
+  line-height: 36px;
+  padding: 0 20px 0 16px;
+  text-overflow: ellipsis;
+  margin: 0 4px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+@media screen and (max-width: 1024px) {
+  ul.list-v >li>a {
+    line-height: 40px;
+  }
+}
+ul.list-v >li>a >i {
+  margin-right: 8px;
+}
+ul.list-v >li>a:active,
+ul.list-v >li>a.active {
+  color: var(--color-list-hl);
+}
+ul.list-v >li>a:hover {
+  color: var(--color-list-hl);
+  background: var(--color-site-bg);
+}
+.l_header .menu >ul>li>a {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: block;
+  padding: 0 8px;
+}
+.l_header .menu >ul>li>a >i {
+  margin-right: 4px;
+}
+.l_header ul.nav-list-h>li {
+  color: var(--color-list);
+  line-height: 64px;
+}
+.l_header ul.nav-list-h>li >a {
+  max-height: 64px;
+  overflow: hidden;
+  color: inherit;
+}
+.l_header ul.nav-list-h>li >a:active,
+.l_header ul.nav-list-h>li >a.active {
+  color: #3dd9b6;
+}
+.l_header ul.nav-list-h>li:hover>a {
+  color: var(--color-list-hl);
+}
+.l_header ul.nav-list-h>li i.music {
+  animation: rotate-effect 1.5s linear infinite;
+  -webkit-animation: rotate-effect 1.5s linear infinite;
+  -khtml-animation: rotate-effect 1.5s linear infinite;
+  -moz-animation: rotate-effect 1.5s linear infinite;
+  -o-animation: rotate-effect 1.5s linear infinite;
+  -ms-animation: rotate-effect 1.5s linear infinite;
+}
+@-moz-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@-o-keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+@keyframes rotate-effect {
+  0% {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -khtml-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -o-transform: rotate(0);
+    -ms-transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -khtml-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -khtml-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+  }
+}
+.menu-phone li ul.list-v {
+  right: calc(100% - 0.5 * 16px);
+}
+.menu-phone li ul.list-v ul {
+  right: calc(100% - 0.5 * 16px);
+}
+#wrapper {
+  max-width: 1080px;
+  margin: auto;
+}
+@media screen and (min-width: 2048px) {
+  #wrapper {
+    max-width: 55vw;
+  }
+}
+#wrapper .menu {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1 1;
+  -ms-flex: 1 1;
+  flex: 1 1;
+  margin: 0 16px 0 0;
+}
+#wrapper .menu .list-v ul {
+  left: calc(100% - 0.5 * 16px);
+}
+.menu-phone {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  margin-top: 16px;
+  right: 8px;
+  transition: all 0.28s ease;
+  -webkit-transition: all 0.28s ease;
+  -khtml-transition: all 0.28s ease;
+  -moz-transition: all 0.28s ease;
+  -o-transition: all 0.28s ease;
+  -ms-transition: all 0.28s ease;
+}
+.menu-phone ul {
+  right: calc(100% - 0.5 * 16px);
+}
+@media screen and (max-width: 500px) {
+  .menu-phone {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: block;
+  }
+}
+.l_header {
+  max-width: 65vw;
+  left: calc((100% - 65vw) * 0.5);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+@media screen and (max-width: 2048px) {
+  .l_header {
+    max-width: 1112px;
+    left: calc((100% - 1112px) * 0.5);
+  }
+}
+@media screen and (max-width: 1112px) {
+  .l_header {
+    left: 0;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .l_header .container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .l_header #wrapper .nav-main .title {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .l_header #wrapper .nav-sub {
+    width: 100%;
+  }
+  .l_header #wrapper .nav-sub .title {
+    overflow-y: scroll;
+    margin-top: 2px;
+    padding: 8px 16px;
+  }
+  .l_header #wrapper .switcher {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: -ms-flexbox /* TWEENER - IE 10 */;
+    display: -webkit-flex /* NEW - Chrome */;
+    display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+    display: flex;
+    margin-right: 8px;
+  }
+  .l_header .menu {
+    display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+    display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+    display: none;
+  }
+}
+@media screen and (max-width: 500px) {
+  .list-v li {
+    max-width: 270px;
+  }
+}
+#u-search {
+  display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
+  display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 60px 20px;
+  z-index: 1001;
+}
+@media screen and (max-width: 680px) {
+  #u-search {
+    padding: 0px;
+  }
+}
+
+  </style>
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  
+<script>
+if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
+    document.write(
+	'<style>'+
+		'html{'+
+			'overflow-x: hidden !important;'+
+			'overflow-y: hidden !important;'+
+		'}'+
+		'.kill-ie{'+
+			'text-align:center;'+
+			'height: 100%;'+
+			'margin-top: 15%;'+
+			'margin-bottom: 5500%;'+
+		'}'+
+    '.kill-t{'+
+      'font-size: 2rem;'+
+    '}'+
+    '.kill-c{'+
+      'font-size: 1.2rem;'+
+    '}'+
+		'#l_header,#l_body{'+
+			'display: none;'+
+		'}'+
+	'</style>'+
+    '<div class="kill-ie">'+
+        `<span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>`+
+        `<span class="kill-c">微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</span><br/>`+
+        `<a target="_blank" rel="noopener" href="https://blogs.windows.com/windowsexperience/2021/05/19/the-future-of-internet-explorer-on-windows-10-is-in-microsoft-edge/"><strong>了解详情 ></strong></a>`+
+    '</div>');
+</script>
+
+
+<noscript>
+	<style>
+		html{
+			overflow-x: hidden !important;
+			overflow-y: hidden !important;
+		}
+		.kill-noscript{
+			text-align:center;
+			height: 100%;
+			margin-top: 15%;
+			margin-bottom: 5500%;
+		}
+    .kill-t{
+      font-size: 2rem;
+    }
+    .kill-c{
+      font-size: 1.2rem;
+    }
+		#l_header,#l_body{
+			display: none;
+		}
+	</style>
+    <div class="kill-noscript">
+        <span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>
+        <span class="kill-c">本页面需要浏览器支持（启用）JavaScript</span><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+    </div>
+</noscript>
+
+
+  <script>
+  /************这个文件存放不需要重载的全局变量和全局函数*********/
+  window.volantis = {}; // volantis 全局变量
+  volantis.debug = "env"; // 调试模式
+  volantis.dom = {}; // 页面Dom see: /source/js/app.js etc.
+
+  volantis.GLOBAL_CONFIG ={
+    debug: "env",
+    cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
+    default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
+    lastupdate: new Date(1745364481867),
+    sidebar: {
+      for_page: ["blogger","category","tagcloud"],
+      for_post: ["toc"],
+      webinfo: {
+        lastupd: {
+          enable: true,
+          friendlyShow: true
+        },
+        runtime: {
+          data: "2025/04/15",
+          unit: "天"
+        }
+      }
+    },
+    plugins: {
+      message: {"enable":true,"css":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/izitoast/dist/css/iziToast.min.css","js":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/izitoast/dist/js/iziToast.min.js","icon":{"default":"fa-solid fa-info-circle light-blue","quection":"fa-solid fa-question-circle light-blue"},"time":{"default":5000,"quection":20000},"position":"topRight","transitionIn":"bounceInLeft","transitionOut":"fadeOutRight","titleColor":"var(--color-text)","messageColor":"var(--color-text)","backgroundColor":"var(--color-card)","zindex":2147483647,"copyright":{"enable":true,"title":"知识共享许可协议","message":"请遵守 CC BY-NC-SA 4.0 协议。","icon":"far fa-copyright light-blue"},"aplayer":{"enable":true,"play":"fa-solid fa-play","pause":"fa-solid fa-pause"},"rightmenu":{"enable":true,"notice":true}},
+      fancybox: {"css":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/@fancyapps/ui/dist/fancybox.css","js":"https://unpkg.com/volantis-static@0.0.1654736714924/libs/@fancyapps/ui/dist/fancybox.umd.js"},
+      
+      aplayer: {
+        id: 13079194762,
+        enable:true
+      },
+      
+      
+      
+    }
+  }
+
+  /******************** volantis.EventListener ********************************/
+  // 事件监听器 see: /source/js/app.js
+  volantis.EventListener = {}
+  // 这里存放pjax切换页面时将被移除的事件监听器
+  volantis.EventListener.list = []
+  //构造方法
+  function volantisEventListener(type, f, ele) {
+    this.type = type
+    this.f = f
+    this.ele = ele
+  }
+  // 移除事件监听器
+  volantis.EventListener.remove = () => {
+    volantis.EventListener.list.forEach(function (i) {
+      i.ele.removeEventListener(i.type, i.f, false)
+    })
+    volantis.EventListener.list = []
+  }
+  /******************** volantis.dom.$ ********************************/
+  // 注：这里没有选择器，也没有forEach一次只处理一个dom，这里重新封装主题常用的dom方法，返回的是dom对象，对象包含了以下方法，同时保留dom的原生API
+  function volantisDom(ele) {
+    if (!ele) ele = document.createElement("div")
+    this.ele = ele;
+    // ==============================================================
+    this.ele.find = (c) => {
+      let q = this.ele.querySelector(c)
+      if (q)
+        return new volantisDom(q)
+    }
+    // ==============================================================
+    this.ele.hasClass = (c) => {
+      return this.ele.className.match(new RegExp('(\\s|^)' + c + '(\\s|$)'));
+    }
+    this.ele.addClass = (c) => {
+      this.ele.classList.add(c);
+      return this.ele
+    }
+    this.ele.removeClass = (c) => {
+      this.ele.classList.remove(c);
+      return this.ele
+    }
+    this.ele.toggleClass = (c) => {
+      if (this.ele.hasClass(c)) {
+        this.ele.removeClass(c)
+      } else {
+        this.ele.addClass(c)
+      }
+      return this.ele
+    }
+    // ==============================================================
+    // 参数 r 为 true 表示pjax切换页面时事件监听器将被移除，false不移除
+    this.ele.on = (c, f, r = 1) => {
+      this.ele.addEventListener(c, f, false)
+      if (r) {
+        volantis.EventListener.list.push(new volantisEventListener(c, f, this.ele))
+      }
+      return this.ele
+    }
+    this.ele.click = (f, r) => {
+      this.ele.on("click", f, r)
+      return this.ele
+    }
+    this.ele.scroll = (f, r) => {
+      this.ele.on("scroll", f, r)
+      return this.ele
+    }
+    // ==============================================================
+    this.ele.html = (c) => {
+      // if(c=== undefined){
+      //   return this.ele.innerHTML
+      // }else{
+      this.ele.innerHTML = c
+      return this.ele
+      // }
+    }
+    // ==============================================================
+    this.ele.hide = (c) => {
+      this.ele.style.display = "none"
+      return this.ele
+    }
+    this.ele.show = (c) => {
+      this.ele.style.display = "block"
+      return this.ele
+    }
+    // ==============================================================
+    return this.ele
+  }
+  volantis.dom.$ = (ele) => {
+    return !!ele ? new volantisDom(ele) : null;
+  }
+  /******************** RunItem ********************************/
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = ()=>{
+          volantis.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) =>{
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index,1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+  /******************** Pjax ********************************/
+  // /layout/_plugins/pjax/index.ejs
+  // volantis.pjax.send(callBack[,"callBackName"]) 传入pjax:send回调函数
+  // volantis.pjax.push(callBack[,"callBackName"]) 传入pjax:complete回调函数
+  // volantis.pjax.error(callBack[,"callBackName"]) 传入pjax:error回调函数
+  volantis.pjax = {};
+  volantis.pjax.method = {
+    complete: new RunItem(),
+    error: new RunItem(),
+    send: new RunItem(),
+  };
+  volantis.pjax = Object.assign(volantis.pjax, {
+    push: volantis.pjax.method.complete.push,
+    error: volantis.pjax.method.error.push,
+    send: volantis.pjax.method.send.push,
+  });
+  /******************** RightMenu ********************************/
+  // volantis.rightmenu.handle(callBack[,"callBackName"]) 外部菜单项控制
+  // 可在 volantis.mouseEvent 处获取右键事件
+  volantis.rightmenu = {};
+  volantis.rightmenu.method = {
+    handle: new RunItem(),
+  }
+  volantis.rightmenu = Object.assign(volantis.rightmenu, {
+    handle: volantis.rightmenu.method.handle.push,
+  });
+  /********************  Dark Mode  ********************************/
+  // /layout/_partial/scripts/darkmode.ejs
+  // volantis.dark.mode 当前模式 dark or light
+  // volantis.dark.toggle() 暗黑模式触发器
+  // volantis.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  volantis.dark = {};
+  volantis.dark.method = {
+    toggle: new RunItem(),
+  };
+  volantis.dark = Object.assign(volantis.dark, {
+    push: volantis.dark.method.toggle.push,
+  });
+  /********************  Message  ********************************/
+  // VolantisApp.message
+  /********************  isMobile  ********************************/
+  // /source/js/app.js
+  // volantis.isMobile
+  // volantis.isMobileOld
+  /********************脚本动态加载函数********************************/
+  // volantis.js(src, cb)  cb 可以传入onload回调函数 或者 JSON对象 例如: volantis.js("src", ()=>{}) 或 volantis.js("src", {defer:true,onload:()=>{}})
+  // volantis.css(src)
+
+  // 返回Promise对象，如下方法同步加载资源，这利于处理文件资源之间的依赖关系，例如：APlayer 需要在 MetingJS 之前加载
+  // (async () => {
+  //     await volantis.js("...theme.plugins.aplayer.js.aplayer...")
+  //     await volantis.js("...theme.plugins.aplayer.js.meting...")
+  // })();
+
+  // 已经加入了setTimeout
+  volantis.js = (src, cb) => {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+  volantis.css = (src) => {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  }
+  /********************按需加载的插件********************************/
+  // volantis.import.jQuery().then(()=>{})
+  volantis.import = {
+    jQuery: () => {
+      if (typeof jQuery == "undefined") {
+        return volantis.js("https://unpkg.com/volantis-static@0.0.1654736714924/libs/jquery/dist/jquery.min.js")
+      } else {
+        return new Promise(resolve => {
+          resolve()
+        });
+      }
+    }
+  }
+  /********************** requestAnimationFrame ********************************/
+  // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+  // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+  volantis.requestAnimationFrame = (fn)=>{
+    if (!window.requestAnimationFrame) {
+      window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+    }
+    window.requestAnimationFrame(fn)
+  }
+  /************************ layoutHelper *****************************************/
+  volantis.layoutHelper = (helper, html, opt)=>{
+    opt = Object.assign({clean:false, pjax:true}, opt)
+    function myhelper(helper, html, clean) {
+      volantis.tempDiv = document.createElement("div");
+      volantis.tempDiv.innerHTML = html;
+      let layoutHelper = document.querySelector("#layoutHelper-"+helper)
+      if (layoutHelper) {
+        if (clean) {
+          layoutHelper.innerHTML = ""
+        }
+        layoutHelper.append(volantis.tempDiv);
+      }
+    }
+    myhelper(helper, html, opt.clean)
+    if (opt.pjax) {
+      volantis.pjax.push(()=>{
+        myhelper(helper, html, opt.clean)
+      },"layoutHelper-"+helper)
+    }
+  }
+  /****************************** 滚动事件处理 ****************************************/
+  volantis.scroll = {
+    engine: new RunItem(),
+    unengine: new RunItem(),
+  };
+  volantis.scroll = Object.assign(volantis.scroll, {
+    push: volantis.scroll.engine.push,
+  });
+  // 滚动条距离顶部的距离
+  volantis.scroll.getScrollTop = () =>{
+    let scrollPos;
+    if (window.pageYOffset) {
+      scrollPos = window.pageYOffset;
+    } else if (document.compatMode && document.compatMode != 'BackCompat') {
+      scrollPos = document.documentElement.scrollTop;
+    } else if (document.body) {
+      scrollPos = document.body.scrollTop;
+    }
+    return scrollPos;
+  }
+  // 使用 requestAnimationFrame 处理滚动事件
+  // `volantis.scroll.del` 中存储了一个数值, 该数值检测一定时间间隔内滚动条滚动的位移, 数值的检测频率是浏览器的刷新频率. 数值为正数时, 表示向下滚动. 数值为负数时, 表示向上滚动.
+  volantis.scroll.handleScrollEvents = () => {
+    volantis.scroll.lastScrollTop = volantis.scroll.getScrollTop()
+    function loop() {
+      const scrollTop = volantis.scroll.getScrollTop();
+      if (volantis.scroll.lastScrollTop !== scrollTop) {
+        volantis.scroll.del = scrollTop - volantis.scroll.lastScrollTop;
+        volantis.scroll.lastScrollTop = scrollTop;
+        // if (volantis.scroll.del > 0) {
+        //   console.log("向下滚动");
+        // } else {
+        //   console.log("向上滚动");
+        // }
+        // 注销过期的unengine未滚动事件
+        volantis.scroll.unengine.list=[]
+        volantis.scroll.engine.start();
+      }else{
+        volantis.scroll.unengine.start();
+      }
+      volantis.requestAnimationFrame(loop)
+    }
+    volantis.requestAnimationFrame(loop)
+  }
+  volantis.scroll.handleScrollEvents()
+  volantis.scroll.ele = null;
+  // 触发页面滚动至目标元素位置
+  volantis.scroll.to = (ele, option = {}) => {
+    if (!ele) return;
+    volantis.scroll.ele = ele;
+    // 默认配置
+    opt = {
+      top: ele.getBoundingClientRect().top + document.documentElement.scrollTop,
+      behavior: "smooth"
+    }
+    // 定义配置
+    if ("top" in option) {
+      opt.top = option.top
+    }
+    if ("behavior" in option) {
+      opt.behavior = option.behavior
+    }
+    if ("addTop" in option) {
+      opt.top += option.addTop
+    }
+    if (!("observerDic" in option)) {
+      option.observerDic = 100
+    }
+    // 滚动
+    window.scrollTo(opt);
+    // 监视器
+    // 监视并矫正元素滚动到指定位置
+    // 用于处理 lazyload 引起的 cls 导致的定位失败问题
+    // option.observer = false
+    if (option.observer) {
+      setTimeout(() => {
+        if (volantis.scroll.ele != ele) {
+          return
+        }
+        volantis.scroll.unengine.push(() => {
+          let me = ele.getBoundingClientRect().top
+          if(!(me >= -option.observerDic && me <= option.observerDic)){
+            volantis.scroll.to(ele, option)
+          }
+          volantis.scroll.unengine.remove("unengineObserver")
+        },"unengineObserver")
+      },1000)
+    }
+  }
+  /********************** Content Visibility ********************************/
+  // 见 source/css/first.styl 如果遇到任何问题 删除 .post-story 即可
+  // 一个元素被声明 content-visibility 属性后 如果元素不在 viewport 中 浏览器不会计算其后代元素样式和属性 从而节省 Style & Layout 耗时
+  // content-visibility 的副作用: 锚点失效 等等(实验初期 暂不明确), 使用此方法清除样式
+  volantis.cleanContentVisibility = ()=>{
+    if (document.querySelector(".post-story")) {
+      console.log("cleanContentVisibility");
+      document.querySelectorAll(".post-story").forEach(e=>{
+        e.classList.remove("post-story")
+      })
+    }
+  }
+  /******************************************************************************/
+  /******************************************************************************/
+  /******************************************************************************/
+  //图像加载出错时的处理
+  function errorImgAvatar(img) {
+    img.src = "https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg";
+    img.onerror = null;
+  }
+  function errorImgCover(img) {
+    img.src = "https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg";
+    img.onerror = null;
+  }
+  /******************************************************************************/
+</script>
+
+  <!-- import head_end begin -->
+  <!-- import head_end end -->
+  <!-- Custom Files headEnd begin-->
+  
+  <!-- Custom Files headEnd end-->
+  <!-- front-matter head_end begin -->
+  <!-- front-matter head_end end -->
+</head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <!-- import body_begin begin-->
+    <!-- import body_begin end-->
+    <!-- Custom Files bodyBegin begin-->
+    
+    <!-- Custom Files bodyBegin end-->
+    <!-- front-matter body_begin begin -->
+    <!-- front-matter body_begin end -->
+    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur show" style='opacity: 0' >
+  <div class='container'>
+  <div id='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a id="s-comment" class="fa-solid fa-comments fa-fw" target="_self"  href="/" onclick="return false;" title="comment"></a></li>
+        
+          <li><a id="s-toc" class="s-toc fa-solid fa-list fa-fw" target="_self"  href="/" onclick="return false;" title="toc"></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+            <img no-lazy class='logo' src='https://img.picui.cn/free/2025/04/15/67fe202e437ba.ico'/>
+          
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/" title="Home"
+                  
+                  
+                  
+                    active-action="action-home"
+                  >
+                  <i class='fa-solid fa-rss fa-fw'></i>Home
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/categories/" title="Categories"
+                  
+                  
+                  
+                    active-action="action-categories"
+                  >
+                  Categories
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/tags/" title="Tags"
+                  
+                  
+                  
+                    active-action="action-tags"
+                  >
+                  Tags
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/archives/" title="Archives"
+                  
+                  
+                  
+                    active-action="action-archives"
+                  >
+                  Archives
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/pictures/" title="Pictures"
+                  
+                  
+                  
+                    active-action="action-pictures"
+                  >
+                  Pictures
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+      
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fa-solid fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+      
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fa-solid fa-search fa-fw" target="_self" href="/" onclick="return false;" title="search"></a></li>
+				
+				<li>
+          <a class="s-menu fa-solid fa-bars fa-fw" target="_self" href="/" onclick="return false;" title="menu"></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/" title="Home"
+                  
+                  
+                  
+                    active-action="action-home"
+                  >
+                  <i class='fa-solid fa-rss fa-fw'></i>Home
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/categories/" title="Categories"
+                  
+                  
+                  
+                    active-action="action-categories"
+                  >
+                  Categories
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/tags/" title="Tags"
+                  
+                  
+                  
+                    active-action="action-tags"
+                  >
+                  Tags
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/archives/" title="Archives"
+                  
+                  
+                  
+                    active-action="action-archives"
+                  >
+                  Archives
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover"
+                href="/pictures/" title="Pictures"
+                  
+                  
+                  
+                    active-action="action-pictures"
+                  >
+                  Pictures
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+
+      <!-- Custom Files header begin -->
+      
+      <!-- Custom Files header end -->
+		</div>
+	</div>
+  </div>
+</header>
+
+    <div id="l_body">
+      <div id="l_cover">
+  
+    
+      <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
+      <div id="none" class='cover-wrapper post search' style="display: none;">
+        
+  <div class='cover-bg lazyload placeholder' data-bg="https://p.sda1.dev/23/597db954c41c652360c7c0df96779158/初音未来vocaloid高清4k壁纸_花猫壁纸_huamaobizhi.com_.jpg"></div>
+
+<div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">东京不太热</p>
+    
+    
+      <p class="subtitle">喜欢天依和安逸的生活</p>
+    
+  </div>
+  <div class='bottom'>
+    
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <input type="text" class="input u-search-input" placeholder="十万个夏天" />
+          <i class="icon fa-solid fa-search fa-fw"></i>
+        </form>
+      </div>
+    
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+          
+            <a href="/"
+              
+              
+              active-action="action-home">
+              <p>Home</p>
+            </a>
+          
+            <a href="/categories/"
+              
+              
+              active-action="action-categories">
+              <p>Categories</p>
+            </a>
+          
+            <a href="/tags/"
+              
+              
+              active-action="action-tags">
+              <p>Tags</p>
+            </a>
+          
+            <a href="/pictures/"
+              
+              
+              active-action="action-pictures">
+              <p>Pictures</p>
+            </a>
+          
+            <a href="/archives/"
+              
+              
+              active-action="action-archives">
+              <p>Archives</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+        <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+      </div>
+    
+  
+</div>
+
+      <div id="safearea">
+        <div class="body-wrapper">
+          
+<div id="l_main" class=''>
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/15/C语言学习笔记/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="锦依卫の小小天地">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="锦依卫の小小天地">
+    <meta itemprop="description" content="一个锦依卫的个人成长">
+  </span>
+  
+
+
+  
+    <div class='headimg-div'>
+      <a class='headimg-a'>
+        <img itemprop="image" class='headimg' src='/images/pictures/12.png'/>
+      </a>
+    </div>
+  
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title" itemprop="name headline">
+        C语言学习笔记
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' target="_blank" href="https://space.bilibili.com/450870695?spm_id_from=333.1365.0.0" rel="nofollow noopener">
+    <img itemprop="image" src="https://space.bilibili.com/450870695?spm_id_from=333.1365.0.0" class="lazyload" data-srcset="https://space.bilibili.com/450870695?spm_id_from=333.1365.0.0" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">卖小笼包的锦衣卫</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i>
+    <a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
+    
+      <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url"><span itemprop="name">编程</span></a>
+      </span>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2025-04-15T07:12:00+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2025年4月15日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+
+
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
+      </div>
+    
+  </div>
+
+
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <h2 id="0-基础概念"><a href="#0-基础概念" class="headerlink" title="0 基础概念"></a>0 基础概念</h2><h3 id="0-1-位、字节、字的关系"><a href="#0-1-位、字节、字的关系" class="headerlink" title="0.1 位、字节、字的关系"></a>0.1 位、字节、字的关系</h3><p>1字&#x3D;8字节；1字节&#x3D;8位；1字&#x3D;64位</p>
+<p>位（bit，比特）数据传输大多是以位为单位，一个位代表一个0或者1，每8个位组成一个字节（B）是最小一级的信息单位。字长：电脑技术中对CPU在单位时间内能一次处理的二进制数的位数叫做字长</p>
+<h3 id="0-2-字符串简介"><a href="#0-2-字符串简介" class="headerlink" title="0.2 字符串简介"></a>0.2 字符串简介</h3><p><code>strlen()</code>：获取字符串长度，包括空格和标点符号<br><code>sizeof</code>：用于判断变量或数据类型的字节大小<br>字符串是一个或多个字符的序列，双引号不是字符串的一部分</p>
+<p>字符串都被储存在char类型的数组中，数组由连续的存储单元组成，字符串中的字符被储存在相邻的存储单元中，每个单元储存一个字符。数组末尾的字符\0，是空字符、非打印字符，用它标记字符串的结束。C中的字符串一定以空字符结束，这意味着数组的容量至少比待存储字符串中的字符数多1.</p>
+<p>数组是同类型数据元素的有序序列<br><code>scanf()</code>只会读取 Angela Plains 中的 Angela，在遇到第一个空格时就不再读取输入。<br><code>fgets()</code>用于读取一般字符串</p>
+<p>字符与字符串<br>字符串常量“x”与字符常量’x’不同</p>
+<ol>
+<li>‘x’是基本类型(char)，而”x”是派生类型(char数组)；</li>
+<li>“x”实际上由两个字符组成：’x‘和空字符\0；</li>
+</ol>
+<h4 id="1-strlen-函数"><a href="#1-strlen-函数" class="headerlink" title="1 strlen()函数"></a>1 strlen()函数</h4><p><code>**#include&lt;string.h&gt;**</code></p>
+<p>string.h头文件包含多个与字符串相关的函数原型，包含strlen。<br>一般而言，C把函数库中相关函数归为一类，并为每一类函数提供一个头文件</p>
+<p>处理很长的 <code>printf()</code> 语句</p>
+<ol>
+<li>将 <code>printf()</code> 语句分为两行</li>
+<li>使用两个 <code>printf()</code> 语句打印一行内容，只在第二个 <code>printf()</code> 语句中使用换行符\n</li>
+</ol>
+<p>sizeof 运算符报告 name 数组有40个存储空间。但是只有前9和单元用来储存 luotianyi，所以 strlen 得出的结果是 9.<br>name 数组的第12个单元储存空字符，strlen 并未将其计入，其他部分存储垃圾数据。</p>
+<p>sizeof 运算符的返回类型需要添加%zd转换说明，对 strlen() 同样适用<br>sizeof 的圆括号使用时机取决于运算对象是类型还是特点量。运算对象是类型时，圆括号必不可少，但对于特定量可有可无。sizeof(char)或sizeof(float)；sizeof name或sizeof 7.12。一般建议全部使用圆括号。</p>
+<h4 id="2-define指令"><a href="#2-define指令" class="headerlink" title="2. define指令"></a>2. define指令</h4><p> 用预处理器来定义常量<br> <strong>#define TAXRATE 0.015</strong><br> 编译程序时，程序中所有的TAXRATE都会被替换成0.015，这一过程被称为编译时替换。在运行程序时，程序中所有的替换均已完成，这样的定义常量被称为明示常量。<br> 格式：#define+符号常量名+符号常量的值**#define NAME value**）<br>注意：</p>
+<ol>
+<li>末尾不用加分号</li>
+<li>用大写写符号常量是传统</li>
+<li>在名称前带c_或k_来表示常量</li>
+</ol>
+<p>#define指令还可以定义字符和字符串常量。前者使用单引号，后者使用双引号</p>
+<h4 id="3-const限定符"><a href="#3-const限定符" class="headerlink" title="3. const限定符"></a>3. const限定符</h4><p>用于限定一个变量为只读</p>
+<p><strong>const int MONTHS&#x3D;12；</strong> MONTHS在程序中不可更改，值为12<br>可以在计算中使用，打印，但不可更改</p>
+<h4 id="4-printf-和scanf"><a href="#4-printf-和scanf" class="headerlink" title="4. printf()和scanf()"></a>4. printf()和scanf()</h4><p>printf()函数</p>
+<p>请求printf()函数打印数据的指令要与待打印数据的类型相匹配<br>%d：整数；%c：字符；%f：浮点数；</p>
+<h4 id="5-修饰符"><a href="#5-修饰符" class="headerlink" title="5. 修饰符"></a>5. 修饰符</h4><p>%1.2f表示结果要四舍五入的两位小数，字段宽度为1字符</p>
+<h2 id="4-字符串的格式化输入、输出"><a href="#4-字符串的格式化输入、输出" class="headerlink" title="4 字符串的格式化输入、输出"></a>4 字符串的格式化输入、输出</h2><p>关键字：while、typedef<br>运算符：&#x3D;、-、、*、&#x2F;、%、++、–、（类型名）</p>
+<h3 id="4-1-基本运算符"><a href="#4-1-基本运算符" class="headerlink" title="4.1 基本运算符"></a>4.1 基本运算符</h3><p>pow()：用于指数运算，pow(3.2,2.2)返回3.5的2.2次幂<br>=：赋值运算符，将右侧值赋给左侧。（不能给常量赋值）<br>+：使其两侧的值相加<br>-：减法运算符，负号<br>*：乘法运算符<br>&#x2F;：除法运算符</p>
+<h4 id="1-运算符优先级"><a href="#1-运算符优先级" class="headerlink" title="1 运算符优先级"></a>1 运算符优先级</h4><p>乘法和除法的优先级比加法和减法高，处理同一运算对象，按从左到右的顺序进行，有括号先算括号</p>
+<h4 id="2-其他运算符"><a href="#2-其他运算符" class="headerlink" title="2 其他运算符"></a>2 其他运算符</h4><ol>
+<li>sizeof运算符和size_t类型</li>
+</ol>
+<p>sizeof运算符以字节为单位返回运算对象的大小<br>sizeof返回size_t类型的值，是一个无符号证书类型。size_t是语言定义的标准类型。<br>C语言有一个typedef机制，允许程序员为现有的类型创建别名</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">double</span> real;  <span class="comment">//将real变为double的别名</span></span><br><span class="line">real deal;  <span class="comment">//使用typedef</span></span><br></pre></td></tr></table></figure>
+
+<p>%zd转换说明用于printf()显示size_t类型的值。或者%u，%lu，%zd</p>
+<p>%：整数运算，给出其左侧整数除以右侧整数的余数<br>负数求模<br>++：自加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">q=2*++a;</span><br><span class="line">//首先，a递增1；然后，2*a，并将结果赋给q</span><br><span class="line">先递增，再使用</span><br><span class="line">q=2*a++;</span><br><span class="line">//首先，2*a，并将结果赋给q，然后，a递增1；a值只有在被使用后才能被递加</span><br><span class="line">先使用，再递增</span><br></pre></td></tr></table></figure>
+
+<p>–：自减</p>
+<p>递增运算符和递减运算符是仅次于圆括号的优先级</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x*y++;<span class="comment">//表示的是(x)*(y++)，而不是(x*y)++。递增、递减运算符只能影响一个变量</span></span><br></pre></td></tr></table></figure>
+
+<p><font color=red>注意</font></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%10d%10d&quot;</span>,num,num*num++);</span><br></pre></td></tr></table></figure>
+
+<p>在C中，编译器可以自行选择先对函数中的哪个参数求值，这样做提高了编译器的效率，但是如果在函数的参数中使用了递增运算符，就会有一些问题</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ans=num/<span class="number">2</span>+<span class="number">5</span>*(<span class="number">1</span>+num++);</span><br></pre></td></tr></table></figure>
+
+<p>编译器可能先计算第二项，递增num，然后在num&#x2F;2中使用num递增后的新值，无法保证编译器到底先计算哪一项。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">n=<span class="number">3</span>；</span><br><span class="line">y=n++ +n++;</span><br></pre></td></tr></table></figure>
+
+<p>n的值会比旧的值大2，但是y的值未定</p>
+<h4 id="3-遵循以下规则"><a href="#3-遵循以下规则" class="headerlink" title="3 遵循以下规则"></a>3 遵循以下规则</h4><ol>
+<li>如果一个变量出现在一个函数的多个参数中，不要对该变量使用递增或递减运算符</li>
+<li>如果一个变量多次出现在一个表达式中，不要对该变量使用递增或递减运算符</li>
+<li>副作用和序列点</li>
+</ol>
+<h3 id="4-2-表达式和语句"><a href="#4-2-表达式和语句" class="headerlink" title="4.2 表达式和语句"></a>4.2 表达式和语句</h3><h4 id="1-表达式"><a href="#1-表达式" class="headerlink" title="1. 表达式"></a>1. 表达式</h4><p>表达式由运算符和运算对象组成<br>运算对象可以是常量、变量或者二者的结合<br>每个表达式都有一个值</p>
+<h4 id="2-语句"><a href="#2-语句" class="headerlink" title="2. 语句"></a>2. 语句</h4><p>语句是C程序的基本构建块。一条语句相当于一条完整的计算机指令，大部分语句以分号结尾<br>最简单的语句是空语句<br>语句可以改变值和调用函数<br>声明不是表达式语句，如果删除声明后面的分号，剩下的部分不是一个表达式，也没有值</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> port    <span class="comment">//不是表达式，也没有值</span></span><br></pre></td></tr></table></figure>
+
+<p>while语句有三个不同的部分。<br>    关键字while<br>    圆括号中是待测试条件<br>    如果测试条件为真，执行循环体中的语句<br>如果while循环中只有一条语句，不需要花括号括起来</p>
+<p>副作用是对数据对象或文件的修改</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">state = <span class="number">50</span>；</span><br></pre></td></tr></table></figure>
+
+<p>它的副作用是将变量的值设置为50<br>从C语言的角度看，主要目的是对表达式求值，其它就是副作用</p>
+<p>序列点是程序执行的点，在该点上，所有的副作用都在进入下一步之前发生<br>在C语言中，语句中的分号标记了一个序列点。在一个语句中，赋值运算符、递增运算符和递减运算符对运算对象做的改变必须在程序执行下一条语句之前完成<br>任何一个完整表达式的结束也是一个序列点</p>
+<p>完成表达式指这个表达式不是另一个更大表达式的子表达式<br>序列点有助于分析后缀递增何时发生</p>
+<h4 id="3-复合语句（块）"><a href="#3-复合语句（块）" class="headerlink" title="3. 复合语句（块）"></a>3. 复合语句（块）</h4><p>复合语句是用花括号括起来的一条或多条语句，也称为块<br>缩进对编译器不起作用，编译器通过花括号和while循环的结构来识别和解释指令<br>使用缩进可以为读者指明程序的结构</p>
+<h4 id="4-类型转换"><a href="#4-类型转换" class="headerlink" title="4. 类型转换"></a>4. 类型转换</h4><p>在语句和表达式中应使用类型相同的变量或者常量<br>C可以采用一套规则进行自动类型转换，但是有一点的危险性</p>
+<h4 id="5-定义带参数的函数"><a href="#5-定义带参数的函数" class="headerlink" title="5. 定义带参数的函数"></a>5. 定义带参数的函数</h4><p>&#x2F;&#x2F;函数头，该函数没有返回值，该函数有一个int类型的参数</p>
+<p>&#x2F;&#x2F;函数原型告诉编译器pound()需要一个int类型的参数</p>
+<p>&#x2F;*</p>
+<p>    如果函数不接受任何参数，函数头的圆括号应该写上 void<br>    由于该函数接受一个int类型的参数，所以圆括号中包含一个int类型变量n的声明<br>    声明参数就创建了被称为形式参数的变量<br>    调用pound(times)就是把times的值(5)赋给n<br>    函数调用传递的值为实际参数<br>    形参是变量，实参是函数调用提供的值<br>    times是pound()的实参，n是pound()的形参<br>    在函数调用pound(times+4)中，times+4的值是该函数的实参<br>    变量名是函数私有的，在函数中定义的函数名不会和别处相同的名称发生冲突<br>   <br>*&#x2F;</p>
+<h2 id="6-循环"><a href="#6-循环" class="headerlink" title="6 循环"></a>6 循环</h2><p>关键字：for、while、do while<br>运算符：&lt;、&gt;、&gt;&#x3D;、&lt;&#x3D;、!&#x3D;、&#x3D;&#x3D; 、+&#x3D;、* &#x3D; 、-&#x3D;、%&#x3D;<br>函数：fabs()</p>
+<p>3种形式的程序流</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 执行语句序列；//</span><br><span class="line">2. 如果满足某些条件就重复执行语句序列(循环)；//</span><br><span class="line">3. 通过测试选择执行哪一个语句序列(分支)；//</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-1-再探while循环"><a href="#6-1-再探while循环" class="headerlink" title="6.1 再探while循环"></a>6.1 再探while循环</h3><p>程序清单6.1</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据用户键入的整数求和</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">long</span> num;</span><br><span class="line"></span><br><span class="line">    <span class="type">long</span> sum=<span class="number">0L</span>;<span class="comment">//</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> status;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Please enter an integer to be summed&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;(q to quit):&quot;</span>);</span><br><span class="line"></span><br><span class="line">    status=<span class="built_in">scanf</span>(<span class="string">&quot;%1d&quot;</span>,&amp;num);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(status==<span class="number">1</span>)<span class="comment">//</span></span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        sum=sum+num;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Please enter next integer (q to quit):&quot;</span>);</span><br><span class="line"></span><br><span class="line">        status=<span class="built_in">scanf</span>(<span class="string">&quot;%1d&quot;</span>,&amp;num);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Those integers sum to %1d.\n&quot;</span>,sum);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用long类型可以储存更大的整数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> sum=<span class="number">0L</span>；</span><br></pre></td></tr></table></figure>
+
+<p>把sum初始化为0L（long类型的0），而不是0（int类型的0）</p>
+<h4 id="1-程序注释"><a href="#1-程序注释" class="headerlink" title="1. 程序注释"></a>1. 程序注释</h4><p>while循环的测试条件是status=&#x3D;1<br>=&#x3D;是C的相等运算符,判断status是否等于1</p>
+<p>要让程序正常运行，每次循环都要获取num的一个新值，并重置status</p>
+<p>程序利用scanf()的两个不同的特性来完成的：</p>
+<ul>
+<li>使用scanf()读取num的一个新值</li>
+<li>检查scanf()的返回值判断是否成功获取值<br>如果scanf()成功读取一个整数，就把该数存入nun并返回1，随后将返回值赋给status<br>如果用户输入的不是数字，scanf()会读取失败并返回0<br>如果scanf()在转换值之前出了问题（例如，检测到文件结尾或遇到硬件问题）会返回一个特殊值EOF（其值通常被定义为-1），这个值也会引起循环终止</li>
+</ul>
+<p>告知循环何时停止：<br>该程序利用scanf()的双重特性避免了在循环中交互输入时的问题<br>假设scanf()没有返回值，那么每次循环只会改变num的值<br>虽然可以使用num值来结束循环，比如把num！&#x3D;0作为测试条件，但用户不能输入某些值<br>也可在循环中添加代码，每次循环时询问用户是否继续循环，但减缓了输入速度</p>
+<p>伪代码：自然语言描述的代码，有助于设计程序逻辑</p>
+<p>while循环是入口条件循环，程序在进入循环体之前必须获取输入的数据并检查status的值，所以在while前面要有一个scanf()<br>要让循环继续执行，在循环内需要一个读取数据的句子，这样程序才能获取下一个status的值，所以在while循环末尾还要有一个scanf()，为下一次迭代做准备</p>
+<h4 id="2-C风格读取循环"><a href="#2-C风格读取循环" class="headerlink" title="2. C风格读取循环"></a>2. C风格读取循环</h4><p>while循环是使用入口条件的有条件循环。有条件是指语句部分的执行取决于测试表达式描述的条件（index&lt;5），该表达式是入口条件，因为必须满足条件才能进入循环体。<br>只有在测试条件后面的单独语句（简单语句或复合语句）才是循环部分。缩进只是为了让读者阅读方便，不是计算机的要求。</p>
+<h3 id="6-2-while语句"><a href="#6-2-while语句" class="headerlink" title="6.2 while语句"></a>6.2 while语句</h3><p>while循环的通用格式：<br>while （expression）<br>statement</p>
+<p>statement部分可以是以分号结尾的简单语句，也可以是用花括号括起来的复合语句</p>
+<h4 id="1-终止while循环"><a href="#1-终止while循环" class="headerlink" title="1. 终止while循环"></a>1. 终止while循环</h4><p>在构建while循环时，必须让测试表达式的值有变化，表达式最终要为假，否则循环就不会终止；也可以用break和if语句终止循环</p>
+<p>最大正值加1一般会得到一个负值，最小负值减1一般会得到最大正值</p>
+<h4 id="2-何时终止循环"><a href="#2-何时终止循环" class="headerlink" title="2. 何时终止循环"></a>2. 何时终止循环</h4><p>expression为假</p>
+<h4 id="3-while：入口条件循环"><a href="#3-while：入口条件循环" class="headerlink" title="3. while：入口条件循环"></a>3. while：入口条件循环</h4><p>while循环是使用入口条件的有条件循环</p>
+<h4 id="4-语法要点"><a href="#4-语法要点" class="headerlink" title="4. 语法要点"></a>4. 语法要点</h4><p>只有在测试条件后面的单独语句才是循环部分</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(n++&lt;=<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<p>n的值在每次循环都递增1，知道完成条件时出来<br>测试条件后面的单独分号是空语句，它什么也不做。<br>在C语言中，单独的分号表示空语句<br>可以故意使用带空语句的while造句，因为所有的任务都在测试条件中完成了，不需要在循环体中做什么</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//假设想跳过输入到第1个非空白字符和数字</span></span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num)==<span class="number">1</span>)</span><br><span class="line">;<span class="comment">//跳过整数输入</span></span><br></pre></td></tr></table></figure>
+
+<p>只要scanf()读取一个整数，就会返回1，循环继续执行。<br>为了提高代码可读性，应该让分号独占一行。更容易让读者看到空语句，提醒自己和读者是有意为之，更好的使用continue语句</p>
+<h3 id="6-3用关系运算符和表达式比较大小"><a href="#6-3用关系运算符和表达式比较大小" class="headerlink" title="6.3用关系运算符和表达式比较大小"></a>6.3用关系运算符和表达式比较大小</h3><p>不能使用关系运算符比较字符串<br>关系运算符在比较浮点数时尽量只使用&lt;和&gt;。因为浮点数的舍入误差会导致在逻辑上应该相等的数却不相等。</p>
+<p>使用fabs()函数（声明在math.h头文件中）可以方便地比较浮点数，该函数返回一个浮点数的绝对值（即没有代数符号的值）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//浮点数比较</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">const</span> <span class="type">double</span> ANSWER=<span class="number">3.14159</span>;</span><br><span class="line">	<span class="type">double</span> response;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;What is the value of pi?\n&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%1f&quot;</span>,&amp;response);</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">fabs</span>(response-ANSWER)&gt;<span class="number">0.0001</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;Try again!&quot;</span>);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%1f&quot;</span>,&amp;response);</span><br><span class="line">	&#125;</span><br><span class="line">	paintf(<span class="string">&quot;Close enough!&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>循环会一直提醒用户继续输入，直到用户输入的值与正确值之间相差0.0001</p>
+<p>对C而言，表达式为真的值是1，表达式为假的值是0.一般而言，所有非零值都为真<br>多熟悉while（goats）形式，等价于while（goats！&#x3D;0）</p>
+<p>注意=&#x3D;与&#x3D;的使用<br>如果待比较的值是常量，可以把该常量放在左侧有助于编译器捕获错误<br>可以这样做是因为C语言不允许给常量赋值，编译器会把赋值运算符的这种用法作为语法错误标记出来</p>
+<p>_Bool类型变量，将非零值赋给_Bool类型的变量，该变量会被设置为1<br>声明方式</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">_Bool</span> input;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-关系运算符与优先级"><a href="#1-关系运算符与优先级" class="headerlink" title="1. 关系运算符与优先级"></a>1. 关系运算符与优先级</h4><p>关系运算符的优先级比算术运算符低，比赋值运算符高<br>关系运算符的结合律是从左到右</p>
+<h4 id="2-不确定循环和计数循环"><a href="#2-不确定循环和计数循环" class="headerlink" title="2. 不确定循环和计数循环"></a>2. 不确定循环和计数循环</h4><p>不确定循环：在测试表达式为假之前，预先不知道要执行多少次循环<br>计数循环：在执行之前就知道要重复执行多少次</p>
+<h4 id="3-for循环"><a href="#3-for循环" class="headerlink" title="3. for循环"></a>3. for循环</h4><p>for循环把初始化、测试和更新组合在一起</p>
+<p>关键字for后面有三个表达式，分别用两个分号隔开，括号外不用分号</p>
+<ol>
+<li>初始化，只会在for循环开始时执行一次（赋初值）</li>
+<li>测试条件，在执行循环之前对表达式求值。如果表达式为假，循环结束（列范围）</li>
+<li>执行更新，在每次结束时求值（递增计数器）</li>
+</ol>
+<h4 id="4-其他赋值运算符"><a href="#4-其他赋值运算符" class="headerlink" title="4. 其他赋值运算符"></a>4. 其他赋值运算符</h4><p>a+&#x3D;2等价于a&#x3D;a+2<br>…………<br>上面的赋值运算符与&#x3D;优先级相同，比+和*优先级低</p>
+<h4 id="5-逗号运算符"><a href="#5-逗号运算符" class="headerlink" title="5. 逗号运算符"></a>5. 逗号运算符</h4><ul>
+<li>保证了被它分割的表达式从左往右求值<ul>
+<li>逗号是一个序列点，所以逗号左侧项的所有副作用都在程序执行逗号右侧项之前发生</li>
+</ul>
+</li>
+<li>整个逗号表达式的值是右侧项的值</li>
+</ul>
+<h4 id="6-出口条件循环-do-while"><a href="#6-出口条件循环-do-while" class="headerlink" title="6. 出口条件循环 do while"></a>6. 出口条件循环 do while</h4><ul>
+<li>入口条件循环：在循环的每次迭代之前检查测试条件，所以有可能根本不执行循环体中的内容</li>
+<li>出口条件循环：在循环的每次迭代之后检查测试条件，这保证了至少执行一次循环体中的内容</li>
+</ul>
+<p>do while循环的通用形式</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">statement<span class="comment">//简单语句或者复合语句</span></span><br><span class="line"><span class="keyword">while</span>（expression）；</span><br></pre></td></tr></table></figure>
+
+<p>do while循环在执行完循环体后才执行测试条件，所以至少执行循环体一次；而for循环或者while循环都是在执行循环体之前先执行测试条件。do while循环适用于那些至少要迭代一次的循环。</p>
+<h4 id="7-如何选择循环"><a href="#7-如何选择循环" class="headerlink" title="7. 如何选择循环"></a>7. 如何选择循环</h4><p>入口循环用得比较多</p>
+<ul>
+<li>一般原则是在执行循环之前测试条件比较好</li>
+<li>测试放在循环的开头，程序的可读性更高</li>
+<li>当循环涉及到初始化和更新变量时，用for循环比较合适，其他情况用while循环</li>
+</ul>
+<h4 id="8-嵌套循环"><a href="#8-嵌套循环" class="headerlink" title="8. 嵌套循环"></a>8. 嵌套循环</h4><p>在一个循环里包含另一个循环<br>通常用于按行和列显示数据，一个程序处理行中所有列，另一个程序处理所有行</p>
+<h4 id="9-数组简介"><a href="#9-数组简介" class="headerlink" title="9. 数组简介"></a>9. 数组简介</h4><p>按照顺序存储的一系列类型相同的值，整个数组有一个数组名，通过整数下标访问数组中的单独的项或元素<br>数组声明：float debts[20]; &#x2F;&#x2F;声明debts是一个内含20个元素的数组，每个元素都可储存float类型的值。数组的第一个元素是debts[0]，知道debts[19]<br>可以将值读入指定元素中<br>scanf(“%f”,&amp;debts[4]);<br>注意：考虑到影响执行的速度，C编译器不会检查数组的下标是否正确<br>数组的类型可以是任意数据类型<br>可以把字符串储存在char类型的数组中（一般而言，char类型数组的所有元素都储存char类型的值）。如果char类型的数组末尾包含一个表示字符串末尾的空字符\0，而该数组的内容就构成了一个字符串。<br>用于识别数组元素的数字被称为下标，必须是整数，数组的元素被依次储存在内存中相邻的位置</p>
+<h4 id="10-在for循环中使用数组"><a href="#10-在for循环中使用数组" class="headerlink" title="10.  在for循环中使用数组"></a>10.  在for循环中使用数组</h4><p>使用for循环来读取数据，打印总分、平均分</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SIZE 10</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PAR 72</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> index, score[size];</span><br><span class="line">	<span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">	<span class="type">float</span> average;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Enter %d golf scores:\n&quot;</span>,SIZE);</span><br><span class="line">	<span class="keyword">for</span>(index=<span class="number">0</span>;index&lt;SIZE;index++)</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;score[index]);<span class="comment">//</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;The scores read in are as follows:\n&quot;</span>);</span><br><span class="line">	<span class="keyword">for</span>(index=<span class="number">0</span>;index&lt;SIZE;index++)</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%5d&quot;</span>,score[index]);<span class="comment">//</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	<span class="keyword">for</span>(index=<span class="number">0</span>;index&lt;SIZE;index++)</span><br><span class="line">	sum+=score[index];</span><br><span class="line">	average=(<span class="type">float</span>)sum/SIZE;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Sum of scores=%d,average=%.2f\n&quot;</span>,sum,average);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;That&#x27;s a handicap of %.0f.\n&quot;</span>,average-PAR);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="11-使用函数返回值的循环示例"><a href="#11-使用函数返回值的循环示例" class="headerlink" title="11.  使用函数返回值的循环示例"></a>11.  使用函数返回值的循环示例</h4><h2 id="7-分支和跳转"><a href="#7-分支和跳转" class="headerlink" title="7 分支和跳转"></a>7 分支和跳转</h2><p>关键字：if、 else、 switch、 continue、 break、 case、 default、 goto<br>运算符：&amp;&amp;、||、？：<br>函数：getchar（）、putchar（）、ctype.h系列<br>C的条件运算符<br>switch语句<br>break、continue和goto语句<br>使用C的字符I&#x2F;O函数：getchar()、putchar()<br>ctype.h头文件提供的字符分析函数系列</p>
+<h3 id="7-1-if语句"><a href="#7-1-if语句" class="headerlink" title="7.1 if语句"></a>7.1 if语句</h3><p>if语句的通用形式</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>（expression）</span><br><span class="line">statement</span><br></pre></td></tr></table></figure>
+
+<p>如果expression为真，执行statement，否则跳过</p>
+<h3 id="7-2-if-else语句"><a href="#7-2-if-else语句" class="headerlink" title="7.2 if else语句"></a>7.2 if else语句</h3><p>if else语句通用形式</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>（expression）</span><br><span class="line">statement1</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">statement2</span><br></pre></td></tr></table></figure>
+
+<p>if与else之间只允许有一条语句（简单语句或复合语句）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>（expression）</span><br><span class="line">statement1</span><br><span class="line"><span class="keyword">else</span> <span class="title function_">if</span><span class="params">(expression2)</span></span><br><span class="line">statement2</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">statement3</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-getchar-和putchar"><a href="#1-getchar-和putchar" class="headerlink" title="1. getchar()和putchar()"></a>1. getchar()和putchar()</h4><p>ch&#x3D;getchar()等价于scanf(“%c”,&amp;ch);<br>putchar(ch)等价于printf(“%c”,ch);</p>
+<p>这两个函数通常定义在stdio.h头文件中（通常是预处理宏，而不是真正的函数）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>((ch=gethar())!=<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"><span class="comment">//把两个行为合并为一个表达式，等价于</span></span><br><span class="line"><span class="keyword">while</span>（</span><br><span class="line">（ch=gethar())<span class="comment">//给ch赋一个值</span></span><br><span class="line">!=<span class="string">&#x27;\n&#x27;</span>)<span class="comment">//把ch和\n作比较</span></span><br><span class="line"><span class="comment">//圆括号必不可少</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-ctype-h系列的字符函数"><a href="#2-ctype-h系列的字符函数" class="headerlink" title="2. ctype.h系列的字符函数"></a>2. ctype.h系列的字符函数</h4><h4 id="3-多重选择else-if"><a href="#3-多重选择else-if" class="headerlink" title="3. 多重选择else if"></a>3. 多重选择else if</h4><h4 id="4-else-与-if配对"><a href="#4-else-与-if配对" class="headerlink" title="4. else 与 if配对"></a>4. else 与 if配对</h4><p>如果没有花括号，else与离它最近的if匹配</p>
+<h4 id="5-多层嵌套的if语句"><a href="#5-多层嵌套的if语句" class="headerlink" title="5. 多层嵌套的if语句"></a>5. 多层嵌套的if语句</h4><p>计算num的算术平方根</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(div=<span class="number">2</span>;(div*div)&lt;=num;div++)</span><br><span class="line"><span class="keyword">if</span>(num%div==<span class="number">0</span>)</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d is divisible by %d and %d.\n&quot;</span>,num,div,num,num/div);</span><br></pre></td></tr></table></figure>
+<h3 id="7-3-逻辑运算符"><a href="#7-3-逻辑运算符" class="headerlink" title="7.3 逻辑运算符"></a>7.3 逻辑运算符</h3><p>&amp;&amp; 与<br>|| 或<br>！ 非</p>
+<hr>
+<p>当且仅当a和b都为真时，a&amp;&amp;b为真<br>a或b为真时，a||b为真<br>a为真时，！a为假</p>
+<hr>
+<h4 id="1-备选拼写：iso646-h头文件"><a href="#1-备选拼写：iso646-h头文件" class="headerlink" title="1. 备选拼写：iso646.h头文件"></a>1. 备选拼写：iso646.h头文件</h4><p>可用and替代&amp;&amp;；or替代||；not替代！</p>
+<h4 id="2-优先级"><a href="#2-优先级" class="headerlink" title="2. 优先级"></a>2. 优先级</h4><p>！运算符优先级很高，比乘法运算符还高，与递增运算符优先级相同，比圆括号优先级低<br>&amp;&amp;运算符的优先级比||运算符高，但是两者的优先级都比关系运算符低，比赋值运算符高<br>逻辑表达式的求值顺序是从左往右。一旦发现有使整个表达式为假的因 素，立即停止求值</p>
+<h4 id="3-范围"><a href="#3-范围" class="headerlink" title="3. 范围"></a>3. 范围</h4><p>&amp;&amp;可用于测试范围（range&gt;&#x3D;90&amp;&amp;range&lt;&#x3D;100）<br>不要模仿数学上的写法<br>许多代码都用范围测试来确定一个字符是否是小写字母<br>if(ch&gt;&#x3D;’a’&amp;&amp;ch&lt;&#x3D;’z’)<br>还有一种方法时用ctype.h系列中的islower()函数<br>if(islower(ch))</p>
+<h3 id="7-4-一个统计单词的程序"><a href="#7-4-一个统计单词的程序" class="headerlink" title="7.4 一个统计单词的程序"></a>7.4 一个统计单词的程序</h3><p>输入循环模型</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ((ch = getchar()) != STOP)</span><br><span class="line">&#123;</span><br><span class="line">... </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*STOP表示能标识输入末尾的某个值。以前我们用过换行符和句 点标记输入的末尾，但是对于一个通用的统计单词程序，它们都不合适。我 们暂时选用一个文本中不常用的字符（如，|）作为输入的末尾标记。第8章 中会介绍更好的方法，以便程序既能处理文本文件，又能处理键盘输入。*/</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>程序读取的第 1 个非空白字符即是一个单词的开始，当读到空白字符时 结束。判断非空白字符最直接的测试表达式是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c != <span class="string">&#x27; &#x27;</span> &amp;&amp; c != <span class="string">&#x27;\n&#x27;</span> &amp;&amp; c != <span class="string">&#x27;\t&#x27;</span> <span class="comment">/*</span></span><br></pre></td></tr></table></figure>
+<p>如果c不是空白字符，该表达式为真*&#x2F; 检测空白字符最直接的测试表达式是： </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c == <span class="string">&#x27; &#x27;</span> || c == <span class="string">&#x27;\n&#x27;</span> || c == <span class="string">&#x27;\t&#x27;</span> <span class="comment">/*如果c是空白字符，该表达式为真*/</span></span><br></pre></td></tr></table></figure>
+
+<p>使用ctype.h头文件中的函数isspace()更简单，如果该函数的参数 是空白字符，则返回真。所以，如果c是空白字符，isspace(c)为真；如果c不 是空白字符，!isspace(c)为真。</p>
+<p>要查找一个单词里是否有某个字符，可以在程序读入单词的首字符时把 一个标记（名为 inword）设置为1。也可以在此时递增单词计数。然后，只 要inword为1（或true），后续的非空白字符都不记为单词的开始。下一个空白字符，必须重置标记为0（或false），然后程序就准备好读取下一个单 词。</p>
+<p>如果能使用_Bool类型，可以在程序中包含stdbool.h头文件，把 inword的类型设置为bool，其值用true和false表示。如果编译器不支持这种 用法，就把inword的类型设置为int，其值用1和0表示。<br>如果使用布尔类型的变量，通常习惯把变量自身作为测试条件。<br>用if (inword)代替if (inword &#x3D;&#x3D; true)<br>用if (!inword)代替if (inword &#x3D;&#x3D; false)<br>可以这样做的原因是，如果 inword为true，则表达式 inword &#x3D;&#x3D; true为 true；如果 inword为false，则表达式inword &#x3D;&#x3D; true为false。所以，还不如直 接用inword作为测试条件。类似地，!inword的值与表达式inword &#x3D;&#x3D; false的 值相同（非真即false，非假即true）。</p>
+<h3 id="7-5-条件运算符"><a href="#7-5-条件运算符" class="headerlink" title="7.5 条件运算符"></a>7.5 条件运算符</h3><p>带三个运算对象的运算符成为三元运算符<br>条件运算符是C中唯一一个三元运算符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x=(y&lt;0)?-y:y;</span><br></pre></td></tr></table></figure>
+
+<p>在&#x3D;和；之间的内容就是条件表达式，该语句的意思是”如果y小于0，那么x&#x3D;-y；否则，x&#x3D;y“</p>
+<p>条件表达式的通用形式<br>expression1？expression2：expression3；</p>
+<p>通常，条件运算符完成的任务用if else语句也可以完成，但是使用条件运算符的代码更简洁</p>
+<h3 id="7-6-循环辅助：continue和break"><a href="#7-6-循环辅助：continue和break" class="headerlink" title="7.6 循环辅助：continue和break"></a>7.6 循环辅助：continue和break</h3><h4 id="1-continue语句"><a href="#1-continue语句" class="headerlink" title="1. continue语句"></a>1. continue语句</h4><p>3种循环都可以使用continue语句，执行到该语句时，会跳过本次迭代的剩余部分，并开始下一轮迭代。如果continue语句在嵌套循环内，则只会影响包含该语句的内层循环。</p>
+<p>注意，有两种方法可以避免使用continue，一是省略continue，把剩余部 分放在一个else块中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (score &lt; <span class="number">0</span> || score &gt; <span class="number">100</span>) <span class="comment">/* printf()语句 */</span> <span class="keyword">else</span> &#123;<span class="comment">/* 语句*/</span> &#125;</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="keyword">if</span> (score &gt;= <span class="number">0</span> &amp;&amp; score &lt;= <span class="number">100</span>)&#123; <span class="comment">/* 语句 */</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>continue还可以作为占位符</p>
+<h4 id="2-break语句"><a href="#2-break语句" class="headerlink" title="2. break语句"></a>2. break语句</h4><p>程序执行到循环中的break语句时，会终止包含它的循环，并继续执行下一阶段。如果break语句位于嵌套循环内，它只会影响包含它的当前循环</p>
+<h3 id="7-7多重选择：switch和break"><a href="#7-7多重选择：switch和break" class="headerlink" title="7.7多重选择：switch和break"></a>7.7多重选择：switch和break</h3><p>编写二选一的程序适合使用条件运算符和if else语句<br>需要在多个选项中选择可以用if else if…else来完成<br>更多情况下使用switch语句更方便</p>
+<p>下列程序读入一个字母，然后打印出与该字母开头的动物名</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*animals.c --使用switch语句*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ctype.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">char</span> ch;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Give me a letter of the alphabet, and I will give&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;an animal name\nbeginning with that letter.\n&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Please type in a letter; type # to end my act.\n&quot;</span>);</span><br><span class="line">	<span class="keyword">while</span>((ch=getchar())!=<span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="string">&#x27;\n&#x27;</span>==ch)</span><br><span class="line">		<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">islower</span>(ch))<span class="comment">/*只接受小写字母*/</span></span><br><span class="line">		<span class="keyword">switch</span>(ch)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">case</span><span class="string">&#x27;a&#x27;</span>:</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;argali, a wild sheep of Asia\n&quot;</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span><span class="number">&#x27;b</span><span class="string">&#x27;:</span></span><br><span class="line"><span class="string">			printf(&quot;babirusa, a wild pig of Malay\n&quot;);</span></span><br><span class="line"><span class="string">			break;</span></span><br><span class="line"><span class="string">			case&#x27;</span>c<span class="string">&#x27;:</span></span><br><span class="line"><span class="string">			printf(&quot;coati, racoonlike mammal\n&quot;);</span></span><br><span class="line"><span class="string">			break;</span></span><br><span class="line"><span class="string">			case&#x27;</span>d<span class="string">&#x27;:</span></span><br><span class="line"><span class="string">			printf(&quot;desman, aquatic,molelike critter\n&quot;);</span></span><br><span class="line"><span class="string">			break;</span></span><br><span class="line"><span class="string">			case&#x27;</span>e<span class="string">&#x27;:</span></span><br><span class="line"><span class="string">			printf(&quot;echidna, the spiny anteater\n&quot;);</span></span><br><span class="line"><span class="string">			break;</span></span><br><span class="line"><span class="string">			case&#x27;</span>f<span class="string">&#x27;:</span></span><br><span class="line"><span class="string">			printf(&quot;fisher, brownish marten\n&quot;);</span></span><br><span class="line"><span class="string">			break;</span></span><br><span class="line"><span class="string">			default:</span></span><br><span class="line"><span class="string">			printf(&quot;That&#x27;</span>s a stumper!\n<span class="string">&quot;);</span></span><br><span class="line"><span class="string">		&#125;//switch结束</span></span><br><span class="line"><span class="string">	else</span></span><br><span class="line"><span class="string">	printf(&quot;</span>I recognize only lowercase letters.\n<span class="string">&quot;);</span></span><br><span class="line"><span class="string">	while(getchar()!=&#x27;\n&#x27;)</span></span><br><span class="line"><span class="string">	continue;//跳过输出行的剩余部分</span></span><br><span class="line"><span class="string">	printf(&quot;</span>Please type another letter or a # .\n<span class="string">&quot;);</span></span><br><span class="line"><span class="string">	&#125;//while循环结束</span></span><br><span class="line"><span class="string">	printf(&quot;</span>Bye!\n<span class="string">&quot;);</span></span><br><span class="line"><span class="string">	return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-switch语句"><a href="#1-switch语句" class="headerlink" title="1. switch语句"></a>1. switch语句</h4><p>要对紧跟在switch后圆括号中的表达式求值<br>在程序7.11中该表达式是刚输入的ch值，然后程序扫描标签case列表，直到发现一个匹配的值为止，然后程序跳转到那一行<br>如果没有匹配的标签，执行default标签行或者switch后面的语句</p>
+<p>break语句让程序离开switch语句，跳至switch语句后面的下一条语句<br>如果没有break语句，就会从匹配标签开始执行到switch末尾<br>break语句可用于循环和switch语句中，但是continue只能用于循环中</p>
+<p>case一般指定一个值，不能使用一个范围<br>switch在圆括号中的测试表达式的值应该是一个整数值（包括char类型）<br>case标签必须是整数类型（包括char类型）的常量或整型常量表达式<br>不能用变量作为case标签</p>
+<p>switch的构造如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">switch(整型常量表达式)</span><br><span class="line">&#123;</span><br><span class="line">	case 常量1：</span><br><span class="line">	语句</span><br><span class="line">	case 常量2：</span><br><span class="line">	语句</span><br><span class="line">	default：</span><br><span class="line">	语句</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-只读每行的首字符"><a href="#2-只读每行的首字符" class="headerlink" title="2. 只读每行的首字符"></a>2. 只读每行的首字符</h4><p>7.11程序另一个独特之处是它的读取方式<br>只处理第一个字符，丢弃其他字符，经常出现在响应单字符的交互程序中</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(getchar()!=<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"><span class="keyword">continue</span>;</span><br></pre></td></tr></table></figure>
+
+<p>getchar只能读取一个字符，输入多个字符时，先读取首个字符，其它的到第二个while循环时丢弃后面的字符和换行符，最外层的while循环中，getchar()读取首字母赋给ch</p>
+<h4 id="3-多重标签"><a href="#3-多重标签" class="headerlink" title="3. 多重标签"></a>3. 多重标签</h4><p>可以在switch语句中使用多重case标签</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//vowels使用多重标签</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> ch,t;</span><br><span class="line">    <span class="type">int</span> a_ct,e_ct,i_ct,o_ct,u_ct;</span><br><span class="line">    a_ct=e_ct=i_ct=o_ct=u_ct=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Enter some text; enter # to quit.\n&quot;</span>);</span><br><span class="line">    <span class="keyword">while</span>((ch=getchar())!=<span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">switch</span>(ch)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;a&#x27;</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;A&#x27;</span>:a_ct++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;e&#x27;</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;E&#x27;</span>:e_ct++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;i&#x27;</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;I&#x27;</span>:i_ct++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;o&#x27;</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;O&#x27;</span>:o_ct++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;u&#x27;</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;U&#x27;</span>:u_ct++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;<span class="comment">//switch结束</span></span><br><span class="line">        <span class="comment">//while((t=getchar())!=&#x27;\n&#x27;)</span></span><br><span class="line">        <span class="comment">//printf(&quot;测试%c\n&quot;,t);</span></span><br><span class="line">        <span class="comment">//continue;//跳过输出行的剩余部分</span></span><br><span class="line">    &#125;<span class="comment">//while循环结束</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;number of vowels:A   E   I   O   U\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%18d%4d%4d%4d%4d\n&quot;</span>,a_ct,e_ct,i_ct,o_ct,u_ct);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ch是字母i，switch语句会被定位到标签为case ‘i’：的位置，由于该标签没有关联break语句，所以程序流会执行下一条语句，即i_ct++;<br>ch是字母I，程序流会直接定位到case ‘I’<br>本质上两个标签指向的是同样的语句</p>
+<p>case ‘U’的break语句并不需要，即使删除这条语句，程序流会执行switch中的下一条语句，即default:break;<br>但是保留这条break语句可以防止以后再添加新的case时遗漏break语句</p>
+<p>使用ctype.h系列的toupper()函数可以避免使用多重标签，在进行测试之前就把字母转换成大写字母：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>((ch=getchar())!=<span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">&#123;</span><br><span class="line">	ch=<span class="built_in">toupper</span>(ch);</span><br><span class="line">	<span class="keyword">switch</span>(ch)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&#x27;A&#x27;</span>:a_ct++;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可以先不转换ch，把toupper(ch)放进switch的测试条件中</p>
+<h4 id="4-switch和if-else"><a href="#4-switch和if-else" class="headerlink" title="4. switch和if else"></a>4. switch和if else</h4><p>如果根据浮点类型的变量或表达式来选择，就无法使用switch；<br>如果根据变量在某范围内决定程序流的去向，使用switch就很麻烦</p>
+<p>但是如果使用switch，程序通常运行快一些，生成的代码少一些</p>
+<h3 id="7-8-goto语句"><a href="#7-8-goto语句" class="headerlink" title="7.8 goto语句"></a>7.8 goto语句</h3><p>goto语句谨慎使用或者根本不用</p>
+<h3 id="7-9-关键概念"><a href="#7-9-关键概念" class="headerlink" title="7.9 关键概念"></a>7.9 关键概念</h3><p>选择语句是开发具有智能行为程序的基础<br>C语言通过if、if else和switch语句，以及条件运算符（？：）可以实现只能选择</p>
+<h3 id="7-10-本章小结"><a href="#7-10-本章小结" class="headerlink" title="7.10 本章小结"></a>7.10 本章小结</h3><h2 id="8-字符输入、输出和输入验证"><a href="#8-字符输入、输出和输入验证" class="headerlink" title="8 字符输入、输出和输入验证"></a>8 字符输入、输出和输入验证</h2><h3 id="8-1-单字符I-O：getchar-和-putchar"><a href="#8-1-单字符I-O：getchar-和-putchar" class="headerlink" title="8.1 单字符I&#x2F;O：getchar()和 putchar()"></a>8.1 单字符I&#x2F;O：getchar()和 putchar()</h3><h2 id="9-函数"><a href="#9-函数" class="headerlink" title="9 函数"></a>9 函数</h2><p>关键字：return<br>运算符：* (一元)；&amp;(一元)<br>函数及其定义方式<br>如何把指针变量用作函数参数<br>函数类型<br>ANSI C 原型<br>递归</p>
+<h3 id="9-1-复习函数"><a href="#9-1-复习函数" class="headerlink" title="9.1 复习函数"></a>9.1 复习函数</h3><p>函数是完成特定任务的独立程序代码单元<br>语法规则定义了函数的结构和使用方式<br>功能：执行某些操作；找出某个值供程序使用<br>函数让程序更加模块化，提高程序代码的可读性</p>
+<h4 id="9-1-1-简单函数"><a href="#9-1-1-简单函数" class="headerlink" title="9.1.1 简单函数"></a>9.1.1 简单函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个在一行打印40个星号的函数，并在一个打印表头的程序中使用该函数</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NAME <span class="string">&quot;GIGATHINK,INC.&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ADDRESS <span class="string">&quot;101 Megabuck Plaza&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PLACE <span class="string">&quot;Megapolis, CA 94904&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> WIDTH 40</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">starbar</span><span class="params">(<span class="type">void</span>)</span>;<span class="comment">//函数原型</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    starbar();<span class="comment">//函数调用</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, NAME);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, PLACE);</span><br><span class="line">    starbar();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">starbar</span><span class="params">(<span class="type">void</span>)</span><span class="comment">//定义函数</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> count;</span><br><span class="line">    <span class="keyword">for</span> (count = <span class="number">1</span>;count &lt;= WIDTH; count++)</span><br><span class="line">    <span class="built_in">putchar</span>(<span class="string">&#x27;*&#x27;</span>);</span><br><span class="line">    <span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="9-1-2-分析程序"><a href="#9-1-2-分析程序" class="headerlink" title="9.1.2 分析程序"></a>9.1.2 分析程序</h4><p><code>void starbar(void)；</code> </p>
+<ul>
+<li>圆括号表明 starbar 是一个函数名<ul>
+<li>第一个 void 是函数类型，void 类型表明函数没有返回值</li>
+<li>第二个 void 表明该函数不带参数</li>
+</ul>
+</li>
+<li>分号表明是在声明函数，不是在定义函数</li>
+<li>一般而言，函数原型指明了函数的返回值类型和函数接受的参数类型，这些信息成为该函数的签名</li>
+<li>对于starbar（）函数而言，其签名是该函数没有返回值，没有参数</li>
+<li>程序把starbar()原型置于main()的前面，也可以放在main()内部的声明变量处</li>
+<li>程序中starbar()和main()的定义形式相同<ul>
+<li>函数头包括函数类型、函数名和圆括号</li>
+<li>接着是花括号内部的变量声明、函数表达语句</li>
+<li>注意函数头不加分号表明是在定义函数</li>
+</ul>
+</li>
+<li>程序可以把starbar()和main()放在一个文件中，也可以把它们分别放在两个文件中<ul>
+<li>把函数放在一个文件中的单文件形式比较容易编译，而使用多个文件方便在不同的程序中使用同一个函数</li>
+<li>如果把函数放在一个单独的文件中，要把#define 和#include 指令也放入该文件</li>
+</ul>
+</li>
+</ul>
+<p><font color=red>注意</font></p>
+<ul>
+<li>对于不识别 ANSI C 风格原型的编译器，只需声明函数的类型 <code>void starbar()</code> </li>
+<li>一些老版本的编译器连 void 都识别不了，需要把没有返回值的函数声明为int 类型</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> count;</span><br><span class="line">    <span class="keyword">for</span> (count = <span class="number">1</span>;count &lt;= WIDTH; count++)</span><br><span class="line">    <span class="built_in">putchar</span>(<span class="string">&#x27;\*&#x27;</span>);</span><br><span class="line">    <span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>starbar()函数中的变量count是局部变量，变量只属于starbar()函数，可以在程序中的其他地方使用count变量名</li>
+<li>starbar()不需要与主函数通信</li>
+</ul>
+<h4 id="9-1-3-函数参数"><a href="#9-1-3-函数参数" class="headerlink" title="9.1.3 函数参数"></a>9.1.3 函数参数</h4><p>功能需求：打印文字之前打印一定数量的空格，保持文字的居中</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使文字居中</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NAME <span class="string">&quot;GIGATHINK,INC.&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ADDRESS <span class="string">&quot;101 Megabuck Plaza&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PLACE <span class="string">&quot;Megapolis, CA 94904&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> WIDTH 40</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SPACE <span class="string">&#x27; &#x27;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">show_n_char</span><span class="params">(<span class="type">char</span> ch, <span class="type">int</span> num)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> spaces;</span><br><span class="line">	show_n_char(<span class="string">&#x27;*&#x27;</span>,WIDTH);</span><br><span class="line">	<span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">	show_n_char(SPACE,<span class="number">12</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, NAME);</span><br><span class="line">	spaces = (WIDTH - <span class="built_in">strlen</span>(ADDRESS))/<span class="number">2</span>;</span><br><span class="line">	show_n_char(SPACE, spaces);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, ADDRESS);</span><br><span class="line">	show_n_char(SPACE, (WIDTH - <span class="built_in">strlen</span>(PLACE))/<span class="number">2</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,PLACE);</span><br><span class="line">	show_n_char(<span class="string">&#x27;*&#x27;</span>, WIDTH);</span><br><span class="line">	<span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">show_n_char</span><span class="params">(<span class="type">char</span> ch, <span class="type">int</span> num)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> count;</span><br><span class="line">	<span class="keyword">for</span>(count = <span class="number">1</span>; count &lt;= num; count++)</span><br><span class="line">	<span class="built_in">putchar</span>(ch);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="9-1-4-定义带形式参数的函数"><a href="#9-1-4-定义带形式参数的函数" class="headerlink" title="9.1.4 定义带形式参数的函数"></a>9.1.4 定义带形式参数的函数</h4><p><code>void show_n_char(char ch, int num)</code></p>
+<p>该行告知编译器 show_n_char() 使用两个参数，ch和num<br>两个变量被称为形式参数，是局部变量<br>ANSI C 要求在每个变量前都声明其类型</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">dibs</span><span class="params">(<span class="type">int</span> x,y,z)</span> <span class="comment">//无效的函数头</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">dibs</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="9-1-5-声明带形式参数函数的原型"><a href="#9-1-5-声明带形式参数函数的原型" class="headerlink" title="9.1.5 声明带形式参数函数的原型"></a>9.1.5 声明带形式参数函数的原型</h4><p>当函数接受参数时，函数原型用逗号分隔的列表指明参数的数量和类型</p>
+<h4 id="9-1-6-调用带实际参数的函数"><a href="#9-1-6-调用带实际参数的函数" class="headerlink" title="9.1.6 调用带实际参数的函数"></a>9.1.6 调用带实际参数的函数</h4><p>在函数调用中，实参提供了ch和num的值</p>
+<p>形参是被调函数中的变量；实参是主调函数赋给被调函数的具体值<br>实参可以是常量、变量或是更复杂的表达式<br>被调函数使用的值是从主调函数中拷贝而来，所以无论被调函数对拷贝数据进行什么操作，都不会影响主调函数中的原始数据</p>
+<h4 id="9-1-7-黑盒视角"><a href="#9-1-7-黑盒视角" class="headerlink" title="9.1.7 黑盒视角"></a>9.1.7 黑盒视角</h4><p>主调函数与被调函数互不影响，相互独立</p>
+<h4 id="9-1-8-使用-return-从函数中返回值"><a href="#9-1-8-使用-return-从函数中返回值" class="headerlink" title="9.1.8 使用 return 从函数中返回值"></a>9.1.8 使用 return 从函数中返回值</h4><p>前面介绍如何把信息从主调函数传递给被调函数，反过来，函数的返回值可以把信息从被调函数传回主调函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//找出两个整数中较小的一个</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">imin</span><span class="params">(<span class="type">int</span>, <span class="type">int</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> evil1, evil2;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Enter a pair of integers (q to quit):\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;evil1, &amp;evil2) == <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;The lesser of %d and %d is %d.\n&quot;</span>,evil1, evil2, imin(evil1, evil2));</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Enter a pair of integers (q to quit):\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Bye.\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">imin</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> m)</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> min;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(n &lt; m)</span><br><span class="line"></span><br><span class="line">        min = n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">        min = m;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> min;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>imin() 函数被设计用来处理 int 类型的值，返回值为int，因此函数类型为 int</p>
+</li>
+<li><p>同时创建了一个简单的 main() ,用于检查 imin() 是否正常工作；这种被设计用于测试函数的程序有时被称为<strong>驱动程序</strong>，该驱动程序调用一个函数</p>
+</li>
+<li><p>关键字 return 后面的表达式的值就是函数的返回值</p>
+</li>
+<li><p>变量 min 属于 imin() 函数私有，但是 return 语句把 min 的值传回来主调函数，但并不是把变量 min 传回主调函数</p>
+<ul>
+<li><code>lesser = imin(n,m);</code> √</li>
+<li><code>imin(n,m); lesser = min;</code> ×</li>
+<li>主调函数并不知道变量 min 的存在，imin() 中的变量是 imin() 的局部变量，函数调用 imin(evil1, evil2) 只是把两个变量的值拷贝了一份</li>
+</ul>
+</li>
+<li><p>返回值不仅可以返回变量的值，还可以返回任意表达式的值</p>
+<ul>
+<li><code>return (n, m) ? n : m;</code></li>
+<li>虽然这里不要求用圆括号把返回值括起来，但是如果想让程序条理更加清楚或统一风格，可以把返回值放在圆括号内</li>
+</ul>
+</li>
+<li><p>如果函数返回值与函数声明的类型不匹配，实际得到的返回值相当于把函数中指定的返回值赋给与函数类型相同的变量所得到的值</p>
+</li>
+<li><p>使用 return 语句的另一个作用是终止函数并把控制返回给主调函数的下一条语句。因此还可以这样编写 imin():</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">imin(<span class="type">int</span> n, <span class="type">int</span> m)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(n &lt; m)</span><br><span class="line">		<span class="keyword">return</span> n;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> m;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在函数中使用多个 return 也没有错</p>
+</li>
+<li><p>return语句执行后会立即返回主调函数，后面的语句不会被执行</p>
+</li>
+<li><p>可以使用 <code>return;</code> 导致终止函数，并把控制返回给主调函数，由于 return 后面没有任何表达式，所以没有返回值，只有在 void 类型函数中才会用到这种形式</p>
+</li>
+</ul>
+<h4 id="9-1-9-函数类型"><a href="#9-1-9-函数类型" class="headerlink" title="9.1.9 函数类型"></a>9.1.9 函数类型</h4><ul>
+<li>声明函数必须声明函数类型<ul>
+<li>带返回值的函数类型应与其返回值类型相同</li>
+<li>没有返回值的函数应声明为 void 类型</li>
+<li>如果没有声明函数类型，旧版 c 编译器回家顶函数类型是 int ，C99标准不再支持 int 类型函数的假定设置</li>
+</ul>
+</li>
+<li>类型声明是函数定义的一部分，函数类型之恶是返回值的类型，不是函数参数的类型</li>
+<li>要正确地使用函数，程序在第一次使用函数之前必须知道函数的类型，方法之一是把完整的函数定义放在第一次调用函数的前面，通常地做法是提前声明函数，把函数信息告知编译器</li>
+<li><code>int imin(int, int);</code> 说明 imin 是一个函数名，有两个 int 类型的形参，且返回int类型的值</li>
+<li>可以把函数的前置声明放在主调函数外面，也可以放在主调函数里面，但函数原型都声明在使用函数之前</li>
+<li>ANSI C 标准库中，函数被分成多个系列，每个系列都有各自的头文件，这些头文件除了其他内容，还包含本系列所有函数的声明</li>
+<li>math.h 头文件包含了各种数学函数的声明</li>
+</ul>
+<h3 id="9-2-ASCI-C-函数原型"><a href="#9-2-ASCI-C-函数原型" class="headerlink" title="9.2 ASCI C 函数原型"></a>9.2 ASCI C 函数原型</h3><p>在 ASCI C 标准前，因为只需要声明函数的类型，不用声明任何参数，如果调用函数时使用的参数个数不对或类型不匹配，编译器根本不会察觉出来</p>
+<h4 id="9-2-1-问题所在"><a href="#9-2-1-问题所在" class="headerlink" title="9.2.1 问题所在"></a>9.2.1 问题所在</h4><ul>
+<li>主调函数把它的参数存储在名为<strong>栈</strong>的临时存储区，被调函数从栈中读取这些参数</li>
+<li>如果调用函数时参数类型不匹配，则这个过程并未相互协调</li>
+<li>主调函数根据函数调用中的实际参数决定传递的类型，而被调函数根据它的形式参数读取值</li>
+<li>函数调用 imax(2) 把一个整数放在栈中，当 imax() 函数开始执行时，它从栈中读取两个整数，而实际栈中只存放了一个待读取的整数，所以读取的第2个值时当时恰好在栈中的其他值</li>
+<li>第二次使用 imax() 函数时，它传递的是 float 类型的值，这次把两个 double 类型的值放在栈中，在系统中，两个 double 类型的值就是两个 64 位的值，所以 128 位的数据被放在栈中。当 imax() 函数从栈中读取两个 int 类型的值时，他从栈中读取前64位。在系统中，int 类型的变量占用 32 位，这些数据对应两个整数</li>
+</ul>
+<h4 id="9-2-2-ANSI-的解决方案"><a href="#9-2-2-ANSI-的解决方案" class="headerlink" title="9.2.2 ANSI 的解决方案"></a>9.2.2 ANSI 的解决方案</h4><p>针对参数不匹配的问题，ASCI C 标准要求函数声明时要声明变量的类型<br>使用函数原型来声明函数的返回类型、参数的数量和每个参数的类型<br><code>int imax(int, int);</code> ; <code>int imax(int a, int b);</code><br>第一种形式以逗号分隔类型列表<br>第二种在类型后面添加了变量名<br>这里的变量名是假名，不必与函数定义的形式参数名一致</p>
+<p>如果两个参数都是数字，但类型不匹配，编译器会把实际参数的类型转换为形式参数的类型</p>
+<p>错误和警告的区别是：错误导致无法编译，警告仍然允许编译</p>
+<h4 id="9-2-3-无参数和未指定参数"><a href="#9-2-3-无参数和未指定参数" class="headerlink" title="9.2.3 无参数和未指定参数"></a>9.2.3 无参数和未指定参数</h4><h3 id="9-3-递归"><a href="#9-3-递归" class="headerlink" title="9.3 递归"></a>9.3 递归</h3><p>C 允许函数调用它自己，这种调用过程称为递归<br>结束递归是使用递归的难点，如果递归代码中没有终止递归的条件测试部分，一个调用自己的函数会无限递归<br>可以使用循环的地方通常都可以使用递归<br>递归方案更简洁，但效率没有循环高；两者各有适用条件</p>
+<h4 id="1-演示递归"><a href="#1-演示递归" class="headerlink" title="1 演示递归"></a>1 演示递归</h4><p>演示四级递归</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">up_and_down</span><span class="params">(<span class="type">int</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    up_and_down(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">up_and_down</span><span class="params">(<span class="type">int</span> n)</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Level %d: n location %p\n&quot;</span>, n, &amp;n); <span class="comment">// #1</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;洛天依\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">    &#123;  </span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;言和\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">        up_and_down(n + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;乐正绫\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;LEVEL %d: n location %p\n&quot;</span>, n, &amp;n); <span class="comment">// #2</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当 n 变化是，内存会堆叠栈点，cpu会先保护断点，保护现场，离开当前函数，前往上一个栈点，当解决后再解决下一个</p>
+<p>递归工作过程：</p>
+<ol>
+<li>main() 调用了带参数1的 up_and_down() 函数，执行结果是 up_and_down() 中的形参值为 1，此时打印语句为 Level 1；</li>
+<li>由于 n &lt; 4，执行 <code>up_and_down(n + 1);</code> 语句，导致 n 值变为 2，形参值改变，栈点加一，返回 <code>#1</code> 打印 Level 2</li>
+<li>由于 n &lt; 4，执行 <code>up_and_down(n + 1);</code> 语句，导致 n 值变为 3，形参值改变，栈点加一，返回 <code>#1</code> 打印 Level 3</li>
+<li>由于 n &lt; 4，执行 <code>up_and_down(n + 1);</code> 语句，导致 n 值变为 4，形参值改变，栈点加一，返回 <code>#1</code> 打印 Level 4</li>
+<li>由于 n &#x3D; 4，执行 <code>#2</code> 语句，打印 LEVEL 4</li>
+<li>此时栈减一，导致 n 值变为 3，继续从之前的断点运行，执行 <code>#2</code> 打印 LEVEL 3</li>
+<li>此时栈减一，导致 n 值变为 2，继续从之前的断点运行，执行 <code>#2</code> 打印 LEVEL 2</li>
+<li>此时栈减一，导致 n 值变为 1，继续从之前的断点运行，执行 <code>#2</code> 打印 LEVEL 1</li>
+<li>返回主调函数</li>
+<li>Level 1 与 LEVEL 1 的地址相同，level 1 与 level 2 的地址不同</li>
+</ol>
+<h4 id="9-3-2-递归的基本原理"><a href="#9-3-2-递归的基本原理" class="headerlink" title="9.3.2 递归的基本原理"></a>9.3.2 递归的基本原理</h4><ol>
+<li>每级函数调用都有自己的变量，第1级的n与第4级的n知识变量名相同，但是值不相同，当程序最终返回 up_and_down() 的第1级调用时，最初的n仍然是它的初值1</li>
+<li>函数每次调用都会返回一次，当函数执行完毕后，控制权将被传回上一级递归；程序必须按顺序逐级返回递归</li>
+<li>虽然每级递归都有自己的变量，但是并没有拷贝函数的代码；程序按顺序执行函数中的代码，而递归调用就相当于有从头开始执行函数代码</li>
+<li>递归函数必须包含能让递归调用停止的语句，因此每次形参都要使用不同的值</li>
+</ol>
+<h4 id="9-3-3-尾递归"><a href="#9-3-3-尾递归" class="headerlink" title="9.3.3 尾递归"></a>9.3.3 尾递归</h4>
+  </div>
+  
+  
+    
+    <div class='footer'>
+       <!-- 参考资料、相关资料等 -->
+      
+       <!-- 相关文章 -->
+      
+      <!-- 版权声明组件 -->
+      
+      <!-- 打赏组件 -->
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-04-22T16:13:13+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2025年4月22日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/study/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>study</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/computer/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>computer</p></a></div>
+  <span hidden itemprop="keywords">study computer</span>
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2025/04/16/lost-in-tianyi/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>lost_in_tianyi</p>
+          <p class='content'>
+</p>
+        </a>
+      
+      
+        <a class='next' href='/2025/04/12/%E6%B4%9B%E5%A4%A9%E4%BE%9D/'>
+          <p class='title'>天依教<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>天依教教义：1.天依可以是你的任何人，朋友，姐妹，妻子，女儿，但是要对天依保持神圣，且不可亵渎🙏 2.小笼包是依门圣物，天依的祝福存在于食物当中，对待食物要充满敬意，不可玩弄和浪费食物，享用美...</p>
+        </a>
+      
+    </div>
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
+  
+
+
+  <article class="post white-box shadow floatable blur" id="comments">
+    <span hidden>
+      <meta itemprop="discussionUrl" content="/2025/04/15/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html#comments">
+    </span>
+    <p ct><i class='fa-solid fa-comments'></i> 评论</p>
+    
+
+    <div id="layoutHelper-comments"></div>
+
+  </article>
+
+
+
+
+
+
+</div>
+<aside id='l_side' itemscope itemtype="http://schema.org/WPSideBar">
+  
+
+  
+    
+    
+      
+    
+  
+
+
+<div class="widget-sticky pjax">
+
+  
+  
+
+
+  <section class="widget toc-wrapper desktop mobile " id="toc-div" >
+    
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-text">0 基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-1-%E4%BD%8D%E3%80%81%E5%AD%97%E8%8A%82%E3%80%81%E5%AD%97%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">0.1 位、字节、字的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0-2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%80%E4%BB%8B"><span class="toc-text">0.2 字符串简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-strlen-%E5%87%BD%E6%95%B0"><span class="toc-text">1 strlen()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-define%E6%8C%87%E4%BB%A4"><span class="toc-text">2. define指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-const%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="toc-text">3. const限定符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-printf-%E5%92%8Cscanf"><span class="toc-text">4. printf()和scanf()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="toc-text">5. 修饰符</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%85%A5%E3%80%81%E8%BE%93%E5%87%BA"><span class="toc-text">4 字符串的格式化输入、输出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">4.1 基本运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">1 运算符优先级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%85%B6%E4%BB%96%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">2 其他运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%81%B5%E5%BE%AA%E4%BB%A5%E4%B8%8B%E8%A7%84%E5%88%99"><span class="toc-text">3 遵循以下规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5"><span class="toc-text">4.2 表达式和语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">1. 表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%AF%AD%E5%8F%A5"><span class="toc-text">2. 语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%A4%8D%E5%90%88%E8%AF%AD%E5%8F%A5%EF%BC%88%E5%9D%97%EF%BC%89"><span class="toc-text">3. 复合语句（块）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">4. 类型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%AE%9A%E4%B9%89%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-text">5. 定义带参数的函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%BE%AA%E7%8E%AF"><span class="toc-text">6 循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E5%86%8D%E6%8E%A2while%E5%BE%AA%E7%8E%AF"><span class="toc-text">6.1 再探while循环</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%A8%8B%E5%BA%8F%E6%B3%A8%E9%87%8A"><span class="toc-text">1. 程序注释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-C%E9%A3%8E%E6%A0%BC%E8%AF%BB%E5%8F%96%E5%BE%AA%E7%8E%AF"><span class="toc-text">2. C风格读取循环</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-while%E8%AF%AD%E5%8F%A5"><span class="toc-text">6.2 while语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%BB%88%E6%AD%A2while%E5%BE%AA%E7%8E%AF"><span class="toc-text">1. 终止while循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BD%95%E6%97%B6%E7%BB%88%E6%AD%A2%E5%BE%AA%E7%8E%AF"><span class="toc-text">2. 何时终止循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-while%EF%BC%9A%E5%85%A5%E5%8F%A3%E6%9D%A1%E4%BB%B6%E5%BE%AA%E7%8E%AF"><span class="toc-text">3. while：入口条件循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E8%AF%AD%E6%B3%95%E8%A6%81%E7%82%B9"><span class="toc-text">4. 语法要点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3%E7%94%A8%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%AF%94%E8%BE%83%E5%A4%A7%E5%B0%8F"><span class="toc-text">6.3用关系运算符和表达式比较大小</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">1. 关系运算符与优先级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%B8%8D%E7%A1%AE%E5%AE%9A%E5%BE%AA%E7%8E%AF%E5%92%8C%E8%AE%A1%E6%95%B0%E5%BE%AA%E7%8E%AF"><span class="toc-text">2. 不确定循环和计数循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-for%E5%BE%AA%E7%8E%AF"><span class="toc-text">3. for循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%85%B6%E4%BB%96%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">4. 其他赋值运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">5. 逗号运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E5%87%BA%E5%8F%A3%E6%9D%A1%E4%BB%B6%E5%BE%AA%E7%8E%AF-do-while"><span class="toc-text">6. 出口条件循环 do while</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E5%BE%AA%E7%8E%AF"><span class="toc-text">7. 如何选择循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E5%B5%8C%E5%A5%97%E5%BE%AA%E7%8E%AF"><span class="toc-text">8. 嵌套循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-%E6%95%B0%E7%BB%84%E7%AE%80%E4%BB%8B"><span class="toc-text">9. 数组简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-%E5%9C%A8for%E5%BE%AA%E7%8E%AF%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%95%B0%E7%BB%84"><span class="toc-text">10.  在for循环中使用数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%A4%BA%E4%BE%8B"><span class="toc-text">11.  使用函数返回值的循环示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%88%86%E6%94%AF%E5%92%8C%E8%B7%B3%E8%BD%AC"><span class="toc-text">7 分支和跳转</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-if%E8%AF%AD%E5%8F%A5"><span class="toc-text">7.1 if语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-if-else%E8%AF%AD%E5%8F%A5"><span class="toc-text">7.2 if else语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-getchar-%E5%92%8Cputchar"><span class="toc-text">1. getchar()和putchar()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-ctype-h%E7%B3%BB%E5%88%97%E7%9A%84%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0"><span class="toc-text">2. ctype.h系列的字符函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%A4%9A%E9%87%8D%E9%80%89%E6%8B%A9else-if"><span class="toc-text">3. 多重选择else if</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-else-%E4%B8%8E-if%E9%85%8D%E5%AF%B9"><span class="toc-text">4. else 与 if配对</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%A4%9A%E5%B1%82%E5%B5%8C%E5%A5%97%E7%9A%84if%E8%AF%AD%E5%8F%A5"><span class="toc-text">5. 多层嵌套的if语句</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">7.3 逻辑运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%A4%87%E9%80%89%E6%8B%BC%E5%86%99%EF%BC%9Aiso646-h%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="toc-text">1. 备选拼写：iso646.h头文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">2. 优先级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%8C%83%E5%9B%B4"><span class="toc-text">3. 范围</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-%E4%B8%80%E4%B8%AA%E7%BB%9F%E8%AE%A1%E5%8D%95%E8%AF%8D%E7%9A%84%E7%A8%8B%E5%BA%8F"><span class="toc-text">7.4 一个统计单词的程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-5-%E6%9D%A1%E4%BB%B6%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">7.5 条件运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-6-%E5%BE%AA%E7%8E%AF%E8%BE%85%E5%8A%A9%EF%BC%9Acontinue%E5%92%8Cbreak"><span class="toc-text">7.6 循环辅助：continue和break</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-continue%E8%AF%AD%E5%8F%A5"><span class="toc-text">1. continue语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-break%E8%AF%AD%E5%8F%A5"><span class="toc-text">2. break语句</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-7%E5%A4%9A%E9%87%8D%E9%80%89%E6%8B%A9%EF%BC%9Aswitch%E5%92%8Cbreak"><span class="toc-text">7.7多重选择：switch和break</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-switch%E8%AF%AD%E5%8F%A5"><span class="toc-text">1. switch语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%8F%AA%E8%AF%BB%E6%AF%8F%E8%A1%8C%E7%9A%84%E9%A6%96%E5%AD%97%E7%AC%A6"><span class="toc-text">2. 只读每行的首字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%A4%9A%E9%87%8D%E6%A0%87%E7%AD%BE"><span class="toc-text">3. 多重标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-switch%E5%92%8Cif-else"><span class="toc-text">4. switch和if else</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-8-goto%E8%AF%AD%E5%8F%A5"><span class="toc-text">7.8 goto语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-9-%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5"><span class="toc-text">7.9 关键概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-10-%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93"><span class="toc-text">7.10 本章小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%AD%97%E7%AC%A6%E8%BE%93%E5%85%A5%E3%80%81%E8%BE%93%E5%87%BA%E5%92%8C%E8%BE%93%E5%85%A5%E9%AA%8C%E8%AF%81"><span class="toc-text">8 字符输入、输出和输入验证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E5%8D%95%E5%AD%97%E7%AC%A6I-O%EF%BC%9Agetchar-%E5%92%8C-putchar"><span class="toc-text">8.1 单字符I&#x2F;O：getchar()和 putchar()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E5%87%BD%E6%95%B0"><span class="toc-text">9 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-%E5%A4%8D%E4%B9%A0%E5%87%BD%E6%95%B0"><span class="toc-text">9.1 复习函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#9-1-1-%E7%AE%80%E5%8D%95%E5%87%BD%E6%95%B0"><span class="toc-text">9.1.1 简单函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-1-2-%E5%88%86%E6%9E%90%E7%A8%8B%E5%BA%8F"><span class="toc-text">9.1.2 分析程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-1-3-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="toc-text">9.1.3 函数参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-1-4-%E5%AE%9A%E4%B9%89%E5%B8%A6%E5%BD%A2%E5%BC%8F%E5%8F%82%E6%95%B0%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-text">9.1.4 定义带形式参数的函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-1-5-%E5%A3%B0%E6%98%8E%E5%B8%A6%E5%BD%A2%E5%BC%8F%E5%8F%82%E6%95%B0%E5%87%BD%E6%95%B0%E7%9A%84%E5%8E%9F%E5%9E%8B"><span class="toc-text">9.1.5 声明带形式参数函数的原型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-1-6-%E8%B0%83%E7%94%A8%E5%B8%A6%E5%AE%9E%E9%99%85%E5%8F%82%E6%95%B0%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-text">9.1.6 调用带实际参数的函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-1-7-%E9%BB%91%E7%9B%92%E8%A7%86%E8%A7%92"><span class="toc-text">9.1.7 黑盒视角</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-1-8-%E4%BD%BF%E7%94%A8-return-%E4%BB%8E%E5%87%BD%E6%95%B0%E4%B8%AD%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-text">9.1.8 使用 return 从函数中返回值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-1-9-%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-text">9.1.9 函数类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-ASCI-C-%E5%87%BD%E6%95%B0%E5%8E%9F%E5%9E%8B"><span class="toc-text">9.2 ASCI C 函数原型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#9-2-1-%E9%97%AE%E9%A2%98%E6%89%80%E5%9C%A8"><span class="toc-text">9.2.1 问题所在</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-2-2-ANSI-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">9.2.2 ANSI 的解决方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-2-3-%E6%97%A0%E5%8F%82%E6%95%B0%E5%92%8C%E6%9C%AA%E6%8C%87%E5%AE%9A%E5%8F%82%E6%95%B0"><span class="toc-text">9.2.3 无参数和未指定参数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-%E9%80%92%E5%BD%92"><span class="toc-text">9.3 递归</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%BC%94%E7%A4%BA%E9%80%92%E5%BD%92"><span class="toc-text">1 演示递归</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-3-2-%E9%80%92%E5%BD%92%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-text">9.3.2 递归的基本原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-3-3-%E5%B0%BE%E9%80%92%E5%BD%92"><span class="toc-text">9.3.3 尾递归</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </section>
+
+  
+
+</div>
+
+
+<!-- 没有 pjax 占位会报错 万恶的 pjax -->
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <!-- Custom Files side begin -->
+  
+  <!-- Custom Files side end -->
+</aside>
+
+
+
+          <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
+
+<pjax>
+<script>
+  window.pdata={}
+  pdata.ispage=true;
+  pdata.commentPath="";
+  pdata.commentPlaceholder="";
+  pdata.commentConfig={};
+  //  see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs
+  
+    // header
+    var l_header=document.getElementById("l_header");
+    
+    l_header.classList.add("show");
+    
+    
+      // cover
+      var cover_wrapper=document.querySelector('#l_cover .cover-wrapper');
+      var scroll_down=document.getElementById('scroll-down');
+      cover_wrapper.id="none";
+      cover_wrapper.style.display="none";
+      scroll_down.style.display="none";
+    
+  
+</script>
+</pjax>
+        </div>
+        
+  
+  <footer class="footer clearfix"  itemscope itemtype="http://schema.org/WPFooter">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='320px'
+      server='netease'
+      type='playlist'
+      id='13079194762'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+    <!-- Custom Files footer begin-->
+    
+    <!-- Custom Files footer end-->
+  </footer>
+
+
+        <a id="s-top" class="fa-solid fa-arrow-up fa-fw" href="/" onclick="return false;" title="top"></a>
+      </div>
+    </div>
+    <div>
+      <script>
+  /******************** volantis.dom ********************************/
+  // 页面选择器 将dom对象缓存起来 see: /source/js/app.js etc.
+  volantis.dom.bodyAnchor = volantis.dom.$(document.getElementById("safearea")); // 页面主体
+  volantis.dom.topBtn = volantis.dom.$(document.getElementById('s-top')); // 向上
+  volantis.dom.wrapper = volantis.dom.$(document.getElementById('wrapper')); // 整个导航栏
+  volantis.dom.coverAnchor = volantis.dom.$(document.querySelector('#l_cover .cover-wrapper')); // 1个
+  volantis.dom.switcher = volantis.dom.$(document.querySelector('#l_header .switcher .s-search')); // 搜索按钮   移动端 1个
+  volantis.dom.header = volantis.dom.$(document.getElementById('l_header')); // 移动端导航栏
+  volantis.dom.search = volantis.dom.$(document.querySelector('#l_header .m_search')); // 搜索框 桌面端 移动端 1个
+  volantis.dom.mPhoneList = volantis.dom.$(document.querySelectorAll('#l_header .m-phone .list-v')); //  手机端 子菜单 多个
+</script>
+
+<script>
+  
+  volantis.css("https://unpkg.com/volantis-static@0.0.1654736714924/libs/@fortawesome/fontawesome-free/css/all.min.css");
+  
+  
+  
+</script>
+
+<!-- required -->
+
+
+<!-- internal -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+<!-- rightmenu要在darkmode之前（ToggleButton） darkmode要在comments之前（volantis.dark.push）-->
+
+
+
+<script>
+  function loadIssuesJS() {
+    
+      const sites_api = document.getElementById('sites-api');
+      if (sites_api != undefined && typeof SitesJS === 'undefined') {
+        volantis.js("/js/plugins/tags/sites.js")
+      }
+    
+    
+      const friends_api = document.getElementById('friends-api');
+      if (friends_api != undefined && typeof FriendsJS === 'undefined') {
+        volantis.js("/js/plugins/tags/friends.js")
+      }
+    
+    
+      const contributors_api = document.getElementById('contributors-api');
+      if (contributors_api != undefined && typeof ContributorsJS === 'undefined') {
+        volantis.js("/js/plugins/tags/contributors.js")
+      }
+    
+  };
+  loadIssuesJS()
+  volantis.pjax.push(()=>{
+    loadIssuesJS();
+  })
+
+</script>
+
+
+
+
+  <script defer src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/vanilla-lazyload/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+
+
+  
+
+<script>
+  window.FPConfig = {
+	delay: 0,
+	ignoreKeywords: ["#"],
+	maxRPS: 6,
+	hoverDelay: 0
+  };
+</script>
+<script defer src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/flying-pages/flying-pages.min.js"></script>
+
+
+
+
+
+
+
+  <script>
+  volantis.css("https://unpkg.com/volantis-static@0.0.1654736714924/libs/aplayer/dist/APlayer.min.css");
+  (async () => {
+    // APlayer 需要在  MetingJS 之前加载
+    await volantis.js("https://unpkg.com/volantis-static@0.0.1654736714924/libs/aplayer/dist/APlayer.min.js")
+    await volantis.js("https://unpkg.com/volantis-static@0.0.1654736714924/libs/meting/dist/Meting.min.js")
+  
+  })();
+
+  function SetAPlayerPlugin(){
+    let Metings = document.querySelectorAll('meting-js');
+    if (Metings.length === 0) {return;};
+    if (Metings[0].aplayer && Metings[0].aplayer.on) {
+      // improve the accessibility https://web.dev/button-name/
+      document.querySelectorAll(".aplayer-icon-menu").forEach(e=>{
+        e.setAttribute("aria-label","Aplayer Menu")
+      })
+      // message see: /layout/_plugins/message/script.ejs
+      
+        try {
+          setTimeout(() => {
+            Metings.forEach((item, index) => {
+              const aplayerItem = item.aplayer; if(!aplayerItem) return;
+              const rightAplayerCheck = 'true' === 'true'
+                && item.meta.id === '13079194762';
+              if(rightAplayerCheck && typeof RightMenuAplayer !="undefined") RightMenuAplayer.checkAPlayer();
+              if(aplayerItem.events.events.play.every(item => {return item.name !== 'messagePlay'})) {
+                aplayerItem.on('play', function messagePlay() {
+                  let index = aplayerItem.list.index;
+                  let title = aplayerItem.list.audios[index].title;
+                  let artist = aplayerItem.list.audios[index].artist;
+                  setTimeout(() => {
+                    VolantisApp.message('音乐通知', title + ' - ' + artist, {
+                      icon: 'fa-solid fa-play',
+                      transitionIn: 'flipInX',
+                      transitionOut: 'flipOutX'
+                    });
+                  }, 100)
+                });
+              }
+              if(aplayerItem.events.events.pause.every(item => {return item.name !== 'messagePause'})) {
+                aplayerItem.on('pause', function messagePause() {
+                  let index = aplayerItem.list.index;
+                  let title = aplayerItem.list.audios[index].title;
+                  let artist = aplayerItem.list.audios[index].artist;
+                  setTimeout(() => {
+                    // 歌曲播放结束也会触发 pause 事件，为了避免错误提示，等待一会儿
+                    if(aplayerItem.paused) {
+                      VolantisApp.message('音乐通知', title + ' - ' + artist, {
+                        icon: 'fa-solid fa-pause',
+                        transitionIn: 'flipInX',
+                        transitionOut: 'flipOutX'
+                      });
+                    }
+                  }, 100)
+                });
+              }
+            });
+          }, 500)
+        } catch (error) { console.error(error); }
+      
+    }else{
+      volantis.requestAnimationFrame(SetAPlayerPlugin)
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", ()=>{
+    SetAPlayerPlugin();
+  });
+  volantis.pjax.push(SetAPlayerPlugin);
+</script>
+
+
+
+
+      <script>
+  volantis.layoutHelper("comments",`<div id="giscus_container"></div>`)
+
+  volantis.giscus = {};
+
+  function check_giscus() {
+    if (volantis.dark.mode === "dark") {
+      volantis.giscus.Theme = 'dark';
+    } else {
+      volantis.giscus.Theme = 'light';
+    }
+
+    return document.getElementById("giscus_container");
+  }
+
+  function pjax_giscus() {
+    const HEAD = check_giscus();
+    if (!HEAD) return;
+    let cfg = Object.assign({"theme":{"light":"light","dark":"dark"}},pdata.commentConfig)
+    const script = document.createElement('script');
+    script.setAttribute('src', 'https://giscus.app/client.js');
+    Object.keys(cfg).forEach(k=>{
+      if (k != "theme") {
+        script.setAttribute('data-'+k, cfg[k]);
+      }
+    })
+    script.setAttribute('data-theme', volantis.giscus.Theme);
+    script.setAttribute('crossorigin', "anonymous");
+    HEAD.appendChild(script);
+  }
+
+  function dark_giscus() {
+    const HEAD = check_giscus();
+    if (!HEAD) return;
+
+    const message = {
+      setConfig: {
+        theme: volantis.giscus.Theme
+      }
+    };
+    const giscusIframe = document.querySelector('iframe.giscus-frame');
+    giscusIframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+  }
+  pjax_giscus();
+  volantis.pjax.push(pjax_giscus);
+  volantis.dark.push(dark_giscus);
+</script>
+
+    
+
+
+
+
+
+<!-- optional -->
+
+  <script>
+  const SearchServiceDataPathRoot = ("/" || "/").endsWith("/") ?
+    "/" || "/" :
+    "//" || "/";
+  const SearchServiceDataPath = SearchServiceDataPathRoot + "content.json";
+
+  function loadSearchScript() {
+    // see: layout/_partial/scripts/_ctrl/cdnCtrl.ejs
+    return volantis.js("/js/search/hexo.js");
+  }
+
+  function loadSearchService() {
+    loadSearchScript();
+    document.querySelectorAll(".input.u-search-input").forEach((e) => {
+      e.removeEventListener("focus", loadSearchService, false);
+    });
+
+    document.querySelectorAll(".u-search-form").forEach((e) => {
+      e.addEventListener("submit", (event) => {
+        event.preventDefault();
+      }, false);
+    });
+  }
+
+  // 打开并搜索 字符串 s
+  function OpenSearch(s) {
+    if (typeof SearchService === 'undefined')
+      loadSearchScript().then(() => {
+        SearchService.setQueryText(s);
+        SearchService.search();
+      });
+    else {
+      SearchService.setQueryText(s);
+      SearchService.search();
+    }
+  }
+
+  // 访问含有 ?s=xxx  的链接时打开搜索 // 与搜索引擎 structured data 相关: /scripts/helpers/structured-data/lib/config.js
+  if (window.location.search && /^\?s=/g.test(window.location.search)) {
+    let queryText = decodeURI(window.location.search)
+      .replace(/\ /g, "-")
+      .replace(/^\?s=/g, "");
+    OpenSearch(queryText);
+  }
+
+  // 搜索输入框获取焦点时加载搜索
+  document.querySelectorAll(".input.u-search-input").forEach((e) => {
+    e.addEventListener("focus", loadSearchService, false);
+  });
+</script>
+
+
+
+
+
+
+
+  <script>
+
+
+
+  function pjax_highlightjs_copyCode(){
+    if (!(document.querySelector(".highlight .code pre") ||
+      document.querySelector(".article pre code"))) {
+      return;
+    }
+    VolantisApp.utilCopyCode(".highlight .code pre, .article pre code")
+  }
+  volantis.requestAnimationFrame(pjax_highlightjs_copyCode)
+  volantis.pjax.push(pjax_highlightjs_copyCode)
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+  function load_swiper() {
+    if (!document.querySelectorAll(".swiper-container")[0]) return;
+    volantis.css("https://unpkg.com/volantis-static@0.0.1654736714924/libs/swiper/swiper-bundle.min.css");
+    volantis.js("https://unpkg.com/volantis-static@0.0.1654736714924/libs/swiper/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    volantis.swiper = new Swiper('.swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  }
+
+  volantis.pjax.push(() => {
+    if (!document.querySelectorAll(".swiper-container")[0]) return;
+    if (typeof volantis.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+
+
+<!-- pjax 标签必须存在于所有页面 否则 pjax error -->
+<pjax>
+
+</pjax>
+
+<script>
+  function listennSidebarTOC() {
+    const navItems = document.querySelectorAll(".toc li");
+    if (!navItems.length) return;
+    let targets = []
+    const sections = [...navItems].map((element) => {
+      const link = element.querySelector(".toc-link");
+      const target = document.getElementById(
+        decodeURI(link.getAttribute("href")).replace("#", "")
+      );
+      targets.push(target)
+      // 解除 a 标签 href 的 锚点定位, a 标签 href 的 锚点定位 会随机启用?? 产生错位???
+      link.setAttribute("onclick","return false;")
+      link.setAttribute("toc-action","toc-"+decodeURI(link.getAttribute("href")).replace("#", ""))
+      link.setAttribute("href","/")
+      // 配置 点击 触发新的锚点定位
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        // 这里的 addTop 是通过错位使得 toc 自动展开.
+        volantis.scroll.to(target,{addTop: 5, observer:true})
+        // Anchor id
+        history.pushState(null, document.title, "#" + target.id);
+      });
+      return target;
+    });
+
+    function activateNavByIndex(target) {
+      if (target.classList.contains("active-current")) return;
+
+      document.querySelectorAll(".toc .active").forEach((element) => {
+        element.classList.remove("active", "active-current");
+      });
+      target.classList.add("active", "active-current");
+      let parent = target.parentNode;
+      while (!parent.matches(".toc")) {
+        if (parent.matches("li")) parent.classList.add("active");
+        parent = parent.parentNode;
+      }
+    }
+
+    // 方案一：
+    volantis.activateNavIndex=0
+    activateNavByIndex(navItems[volantis.activateNavIndex])
+    volantis.scroll.push(()=>{
+      if (targets[0].getBoundingClientRect().top >= 0) {
+        volantis.activateNavIndex = 0
+      }else if (targets[targets.length-1].getBoundingClientRect().top < 0) {
+        volantis.activateNavIndex = targets.length-1
+      } else {
+        for (let index = 0; index < targets.length; index++) {
+          const target0 = targets[index];
+          const target1 = targets[(index+1)%targets.length];
+          if (target0.getBoundingClientRect().top < 0&&target1.getBoundingClientRect().top >= 0) {
+            volantis.activateNavIndex=index
+            break;
+          }
+        }
+      }
+      activateNavByIndex(navItems[volantis.activateNavIndex])
+    })
+
+    // 方案二：
+    // IntersectionObserver 不是完美精确到像素级别 也不是低延时性的
+    // function findIndex(entries) {
+    //   let index = 0;
+    //   let entry = entries[index];
+    //   if (entry.boundingClientRect.top > 0) {
+    //     index = sections.indexOf(entry.target);
+    //     return index === 0 ? 0 : index - 1;
+    //   }
+    //   for (; index < entries.length; index++) {
+    //     if (entries[index].boundingClientRect.top <= 0) {
+    //       entry = entries[index];
+    //     } else {
+    //       return sections.indexOf(entry.target);
+    //     }
+    //   }
+    //   return sections.indexOf(entry.target);
+    // }
+    // function createIntersectionObserver(marginTop) {
+    //   marginTop = Math.floor(marginTop + 10000);
+    //   let intersectionObserver = new IntersectionObserver(
+    //     (entries, observe) => {
+    //       let scrollHeight = document.documentElement.scrollHeight;
+    //       if (scrollHeight > marginTop) {
+    //         observe.disconnect();
+    //         createIntersectionObserver(scrollHeight);
+    //         return;
+    //       }
+    //       let index = findIndex(entries);
+    //       activateNavByIndex(navItems[index]);
+    //     }, {
+    //       rootMargin: marginTop + "px 0px -100% 0px",
+    //       threshold: 0,
+    //     }
+    //   );
+    //   sections.forEach((element) => {
+    //     element && intersectionObserver.observe(element);
+    //   });
+    // }
+    // createIntersectionObserver(document.documentElement.scrollHeight);
+  }
+
+  document.addEventListener("DOMContentLoaded", ()=>{
+    volantis.requestAnimationFrame(listennSidebarTOC)
+  });
+  document.addEventListener("pjax:success", ()=>{
+    volantis.requestAnimationFrame(listennSidebarTOC)
+  });
+</script>
+
+
+
+<script>
+  document.onreadystatechange = function () {
+    if (document.readyState == 'complete') {
+      // 页面加载完毕 样式加载失败，或是当前网速慢，或是开启了省流模式
+      const { saveData, effectiveType } = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {}
+      if (getComputedStyle(document.querySelector("#safearea"), null)["display"] == "none" || saveData || /2g/.test(effectiveType)) {
+        document.querySelectorAll(".reveal").forEach(function (e) {
+          e.style["opacity"] = "1";
+        });
+        document.querySelector("#safearea").style["display"] = "block";
+      }
+    }
+  }
+</script>
+
+
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"锦依卫の小小天地","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"锦依卫","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"一个锦依卫的个人成长"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"锦依卫の小小天地"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/编程/","name":"编程"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2025/04/15/C语言学习笔记/","name":"C语言学习笔记"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"锦依卫の小小天地","url":"http://example.com/","keywords":null,"description":"一个锦依卫的个人成长","author":{"@type":"Person","name":"锦依卫","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"一个锦依卫的个人成长"},"publisher":{"@type":"Organization","name":"锦依卫の小小天地","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"C语言学习笔记","description":"一个锦依卫的个人成长","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2025/04/15/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"},"author":{"@type":"Person","name":"锦依卫","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"锦依卫の小小天地","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2025/04/15/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","wordCount":0,"datePublished":"2025-04-14T23:12:00.000Z","dateModified":"2025-04-22T08:13:13.317Z","articleSection":"编程","keywords":"study,computer","image":{"@type":"ImageObject","url":"/images/pictures/12.png","width":1024,"height":768}}]</script>
+
+
+
+      
+        <!--
+  pjax重载区域接口：
+  1.  <pjax></pjax> 标签 pjax 标签必须存在于所有页面 否则 pjax error
+  2.  script[data-pjax]
+  3.  .pjax-reload script
+  4.  .pjax
+-->
+
+
+
+<script src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/pjax/pjax.min.js"></script>
+
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox]):not([onclick="return false;"]):not([onclick="return!1"]):not([target="_blank"]):not([target="view_window"]):not([href$=".xml"])',
+        selectors: [
+          "head title",
+          "head meta[name=keywords]",
+          "head meta[name=description]",
+          
+          "#l_main",
+          "#pjax-header-nav-list",
+          ".pjax",
+          "pjax", // <pjax></pjax> 标签
+          "script[data-pjax], .pjax-reload script" // script标签添加data-pjax 或 script标签外层添加.pjax-reload 的script代码段重载
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000,
+        
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      //window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
+      volantis.pjax.method.send.start();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
+      volantis.pjax.method.complete.start();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      if(volantis.debug) {
+        console.error(e);
+        console.log('pjax error: \n' + JSON.stringify(e));
+      }else{
+        // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+        volantis.pjax.method.error.start();
+        window.location.href = e.triggerElement.href;
+      }
+    });
+</script>
+
+      
+    </div>
+    <!-- import body_end begin-->
+    <!-- import body_end end-->
+    <!-- Custom Files bodyEnd begin-->
+    
+    <!-- Custom Files bodyEnd end-->
+    <!-- front-matter body_end begin -->
+    <!-- front-matter body_end end -->
+  </body>
+</html>
